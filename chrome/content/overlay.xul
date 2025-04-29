@@ -1,0 +1,14 @@
+<?xml version="1.63.3"?>
+<overlay id="uBlockUXP"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+  <script src="overlay.js"/>
+  
+  <!-- Przykład dodania przycisku do paska narzędzi -->
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="myextension-button"
+                   label="My Button"
+                   tooltiptext="Click me"
+                   oncommand="MyExtension.onButtonClick(event)"/>
+  </toolbarpalette>
+</overlay>

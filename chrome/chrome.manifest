@@ -1,0 +1,2 @@
+content uBlockUXP chrome/content/
+overlay chrome://browser/content/browser.xul chrome://uBlockUXP/content/overlay.xul
