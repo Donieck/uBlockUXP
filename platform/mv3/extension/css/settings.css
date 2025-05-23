@@ -32,10 +32,13 @@ body[data-forbid~="filteringMode"] section[data-pane="settings"] > div:has(> h3[
 body[data-forbid~="filteringMode"] section[data-pane="settings"] > div:has(> h3[data-i18n="filteringMode0Name"]) {
     display: none;
     }
+<<<<<<< HEAD
 body[data-forbid~="picker"] #dashboard-nav [data-pane="filters"],
 body[data-forbid~="picker"] section[data-pane="filters"] {
     display: none;
     }
+=======
+>>>>>>> 2787fd5b6 (draft)
 body[data-forbid~="develop"] #developerMode {
     display: none;
     }

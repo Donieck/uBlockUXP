@@ -69,8 +69,43 @@ section .cm-lineWrapping {
 <body>
 <h2>uBO-flavored JSONPath tool</h2>
 <main>
+<<<<<<< HEAD
     <section>
     </section>
+=======
+    <textarea id="json-data" placeholder="JSON data" spellcheck="false">{
+  "store": {
+    "book": [ 
+      { "category": "reference",
+        "author": "Nigel Rees",
+        "title": "Sayings of the Century",
+        "price": 8.95
+      },
+      { "category": "fiction",
+        "author": "Evelyn Waugh",
+        "title": "Sword of Honour",
+        "price": 12.99
+      },
+      { "category": "fiction",
+        "author": "Herman Melville",
+        "title": "Moby Dick",
+        "isbn": "0-553-21311-3",
+        "price": 8.99
+      },
+      { "category": "fiction",
+        "author": "J. R. R. Tolkien",
+        "title": "The Lord of the Rings",
+        "isbn": "0-395-19395-8",
+        "price": 22.99
+      }
+    ],
+    "bicycle": {
+      "color": "red",
+      "price": 19.95
+    }
+  }
+}</textarea>
+>>>>>>> 2787fd5b6 (draft)
     <input id="jsonpath-input" placeholder="JSON path expression" spellcheck="false" value="$..book[?@.price<10]" />
     <div id="jsonpath-result">&nbsp;</div>
 </main>
@@ -85,6 +120,7 @@ section .cm-lineWrapping {
 
     import { JSONPath } from '../src/js/jsonpath.js';
 
+<<<<<<< HEAD
     let aLastText = JSON.stringify({
       store: {
         book: [ {
@@ -130,6 +166,18 @@ section .cm-lineWrapping {
             data = {};
         }
         return data;
+=======
+    function readJSON() {
+        const textarea = document.querySelector('#json-data');
+        try {
+            jsonData = JSON.parse(textarea.value);
+        } catch {
+            jsonData = {};
+        }
+        if ( typeof jsonData !== 'object' || jsonData === null ) {
+            jsonData = {};
+        }
+>>>>>>> 2787fd5b6 (draft)
     }
 
     function formatResult(a) {
@@ -168,6 +216,7 @@ section .cm-lineWrapping {
     let jsonDataIn = {};
     let processTimer;
 
+<<<<<<< HEAD
     const cmMergeView = self.cm6.createMergeView({
         aDoc: aLastText,
         aUpdateListener: info => {
@@ -182,6 +231,15 @@ section .cm-lineWrapping {
             }, 71);
         },
     }, document.querySelector('section'));
+=======
+    {
+        const textarea = document.querySelector('#json-data');
+        textarea.addEventListener('input', ( ) => {
+            readJSON();
+            process();
+        });
+    }
+>>>>>>> 2787fd5b6 (draft)
 
     {
         const input = document.querySelector('#jsonpath-input');
@@ -190,6 +248,10 @@ section .cm-lineWrapping {
         });
     }
 
+<<<<<<< HEAD
+=======
+    readJSON();
+>>>>>>> 2787fd5b6 (draft)
     process();
 </script>
 

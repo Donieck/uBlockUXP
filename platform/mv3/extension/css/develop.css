@@ -19,18 +19,27 @@ section[data-pane="develop"] > div > * {
     margin-top: 1em;
     }
 
+<<<<<<< HEAD
 #cm-container {
+=======
+#cm-dnrRules {
+>>>>>>> 2787fd5b6 (draft)
     flex-grow: 1;
     font-size: var(--monospace-size);
     overflow: hidden;
     }
 
 /* https://discuss.codemirror.net/t/how-to-set-max-height-of-the-editor/2882/2 */
+<<<<<<< HEAD
 #cm-container .cm-editor {
+=======
+#cm-dnrRules .cm-editor {
+>>>>>>> 2787fd5b6 (draft)
     background-color: var(--surface-0);
     height: 100%;
     }
 
+<<<<<<< HEAD
 #cm-container .cm-editor .cm-line:has(.ubol-boundary) {
     background-image: url('line-hor-dashed.png'), url('line-hor-dashed.png');
     background-position: left 3px, left calc(100% - 3px);
@@ -166,3 +175,14 @@ section[data-pane="develop"] > div > * {
     background-color: color-mix(in srgb, var(--info3-ink) 15%, transparent 85%);
     padding: var(--default-gap-xxsmall) var(--default-gap-xsmall);
     }
+=======
+#cm-dnrRules .cm-editor .cm-line {
+    border-bottom: 1px dotted transparent;
+    border-top: 1px dotted transparent;
+    }
+
+#cm-dnrRules .cm-editor .cm-line:has(.ͼ5) {
+    border-bottom: 1px dotted var(--border-1);
+    border-top: 1px dotted var(--border-1);
+    }
+>>>>>>> 2787fd5b6 (draft)

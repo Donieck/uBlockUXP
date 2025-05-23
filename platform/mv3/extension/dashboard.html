@@ -14,30 +14,31 @@
 <link rel="stylesheet" href="css/filtering-mode.css">
 <link rel="stylesheet" href="css/settings.css">
 <link rel="stylesheet" href="css/develop.css">
+<link rel="stylesheet" href="css/develop.css">
 
+<link rel="icon" type="image/png" href="img/icon_64.png"/>
 <link rel="icon" type="image/png" href="img/icon_64.png"/>
 </head>
 
 <body data-pane="settings" class="loading">
     <!-- -------- -->
-    <header>
-        <nav id="dashboard-nav">
-            <span class="logo"><img data-i18n-title="extName" src="img/ublock.svg" alt="uBO Lite"></span><!--
-         --><button class="tabButton" type="button" data-pane="settings" data-i18n="settingsPageName" tabindex="0"></button><!--
-         --><button class="tabButton" type="button" data-pane="rulesets" data-i18n="aboutFilterLists" tabindex="0"></button><!--
-         --><button class="tabButton" type="button" data-pane="filters" data-i18n="customFiltersPageName"tabindex="0"></button><!--
-         --><button class="tabButton" type="button" data-pane="develop" data-i18n="developPageName"tabindex="0"></button><!--
-         --><button class="tabButton" type="button" data-pane="about" data-i18n="aboutPageName" tabindex="0"></button>
-        </nav>
-        <!-- -------- -->
-        <div data-pane-related="rulesets">
-            <p><span id="commit-spinner" class="fa-icon">spinner</span> <span id="listsOfBlockedHostsPrompt"></span></p>
-            <p id="dnrError"></p>
-            <p><input id="findInLists" type="search" spellcheck="false" placeholder="findListsPlaceholder" /></p>
-        </div>
-    </header>
+    <nav id="dashboard-nav">
+        <span class="logo"><img data-i18n-title="extName" src="img/ublock.svg" alt="uBO Lite"></span><!--
+     --><button class="tabButton" type="button" data-pane="settings" data-i18n="settingsPageName" tabindex="0"></button><!--
+     --><button class="tabButton" type="button" data-pane="rulesets" data-i18n="aboutFilterLists" tabindex="0"></button><!--
+     --><button class="tabButton" type="button" data-pane="develop" tabindex="0">Develop</button><!--
+     --><button class="tabButton" type="button" data-pane="about" data-i18n="aboutPageName" tabindex="0"></button>
+    </nav>
     <!-- -------- -->
     <section data-pane="settings">
+        <div>
+            <h3 data-i18n="behaviorSectionLabel"></h3>
+            <p><label id="autoReload" data-i18n="autoReloadLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label>
+            </p>
+            <p><label id="showBlockedCount" data-i18n="showBlockedCountLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label>
+            <p id="developerMode"><label><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>Developer mode</label>
+        </div>
+
         <div>
             <h3 data-i18n="defaultFilteringModeSectionLabel"></h3>
             <p data-i18n="defaultFilteringModeDescription"></p>
@@ -88,14 +89,7 @@
                     <div data-i18n="completeFilteringModeDescription"></div>
                 </label>
             </div>
-        </div>
-        <div>
-            <h3 data-i18n="behaviorSectionLabel"></h3>
-            <p><label id="autoReload" data-i18n="autoReloadLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label>
-            </p>
-            <p><label id="showBlockedCount" data-i18n="showBlockedCountLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label>
-            <p data-platform-exclude="safari"><label id="strictBlockMode" data-i18n="enableStrictBlockLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label><legend data-i18n="enableStrictBlockLegend"></legend>
-            <p id="developerMode"><label data-i18n="developerModeLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label><legend data-i18n="developerModeLegend"></legend>
+            <p><label id="strictBlockMode" data-i18n="enableStrictBlockLabel"><span class="input checkbox"><input type="checkbox"><svg viewBox="0 0 24 24"><path d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg></span>_</label><legend data-i18n="enableStrictBlockLegend"></legend>
         </div>
         <div>
             <h3 data-i18n="settingsBackupRestoreLabel">_</h3>
@@ -109,37 +103,23 @@
     </section>
     <!-- -------- -->
     <section data-pane="rulesets">
-        <div id="lists"></div>
-    </section>
-    <!-- -------- -->
-    <section data-pane="filters">
-        <ul class="hostnames"></ul>
-        <aside>
-            <details class="importFromText"><summary data-i18n="customFiltersImportExportLabel">_</summary>
-                <div><textarea spellcheck="false" placeholder="customFiltersImportTextareaPlaceholder"></textarea></div>
-                <p>
-                    <button class="iconified dontshrink" type="button"><span class="fa-icon">check</span><span data-i18n="addButton">_</span><span class="hover"></span></button>
-                    <button class="iconified dontshrink" type="button"><span class="fa-icon">download-alt</span><span data-i18n="importAndAppendButton">_</span><span class="hover"></span></button>
-                    <button class="iconified dontshrink" type="button"><span class="fa-icon">upload-alt</span><span data-i18n="exportButton">_</span><span class="hover"></span></button><input type="file" accept="text/plain">
-                </p>
-            </details>
-        </aside>
+        <div>
+            <p id="listsOfBlockedHostsPrompt"></p>
+            <p><input id="findInLists" type="search" spellcheck="false" placeholder="findListsPlaceholder" /></p>
+        </div>
     </section>
     <!-- -------- -->
     <section data-pane="develop">
         <div>
             <p>
-                <label for="editors" data-i18n="developDropdownLabel"></label> <select id="editors">
-                    <option value="modes" selected data-i18n="developOptionFilteringModeDetails"></option>
-                    <option value="dnr.rw.user" data-i18n="developOptionCustomDnrRules"></option>
-                    <hr>
-                    <optgroup label="" data-i18n-label="developOptionDnrRulesOf">
-                        <option value="dnr.ro.dynamic" data-i18n="developOptionDynamicRuleset"></option>
-                        <option value="dnr.ro.session" data-i18n="developOptionSessionRuleset"></option>
-                    </optgroup>
-                </select>&nbsp;
+                <button id="dnrRulesApply" class="preferred iconified" type="button" disabled><span class="fa-icon">save</span><span data-i18n>Save</span><span class="hover"></span></button>
+                <button id="dnrRulesRevert" class="iconified" type="button" disabled><span class="fa-icon">undo</span><span data-i18n>Revert</span><span class="hover"></span></button>
+                &emsp;
+                <button id="dnrRulesImport" class="iconified" type="button"><span class="fa-icon">download-alt</span><span data-i18n>Import and append&mldr;</span><span class="hover"></span></button>
+                <button id="dnrRulesExport" class="iconified" type="button"><span class="fa-icon">upload-alt</span><span data-i18n>Export&mldr;</span><span class="hover"></span></button>
             </p>
-            <div id="cm-container"></div>
+            <p>Enter your own DNR rules below.</p>
+            <div id="cm-dnrRules"></div>
         </div>
     </section>
     <!-- -------- -->
@@ -164,7 +144,7 @@
                 <div class="li"><span><a href="https://fontawesome.com/" target="_blank">FontAwesome font family</a> by <a href="https://github.com/davegandy">Dave Gandy</a></span></div>
                 <div class="li"><span><a href="https://github.com/mathiasbynens/punycode.js" target="_blank">Punycode.js</a> by <a href="https://github.com/mathiasbynens">Mathias Bynens</a></span></div>
                 <div class="li"><span><a href="https://flagpedia.net/" target="_blank">Flags of the World</a> by <a href="https://www.davidkrmela.com/">David Krmela</a></span></div>
-                <div class="li"><span><a href="https://codemirror.net/" target="_blank">CodeMirror 6</a> by <a href="https://github.com/marijnh">Marijn Haverbeke</a></span></div>
+                <div class="li"><span><a href="https://codemirror.net/" target="_blank">CodeMirror</a> by <a href="https://github.com/marijnh">Marijn Haverbeke</a></span></div>
             </div>
             <hr>
             <details><summary data-i18n="supportS5H"></summary>
@@ -252,7 +232,6 @@
 <script src="js/i18n.js" type="module"></script>
 <script src="js/dashboard.js" type="module"></script>
 <script src="js/settings.js" type="module"></script>
-<script src="js/filter-manager-ui.js" type="module"></script>
 <script src="js/develop.js" type="module"></script>
 
 </body>

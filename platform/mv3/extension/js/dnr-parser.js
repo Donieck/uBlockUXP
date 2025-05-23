@@ -89,6 +89,7 @@ const perScopeParsers = {
         const { key, val } = node;
         switch ( key ) {
         case 'action':
+<<<<<<< HEAD
         case 'condition':
             if ( val !== undefined ) { return false; }
             rule[key] = {};
@@ -103,6 +104,20 @@ const perScopeParsers = {
         case 'priority': {
             const n = parseInt(val, 10);
             if ( isNaN(n) || n < 1 ) { return false; }
+=======
+            if ( val !== undefined ) { return false; }
+            rule.action = {};
+            scope.push('action');
+            break;
+        case 'condition':
+            if ( val !== undefined ) { return false; }
+            rule.condition = {};
+            scope.push('condition');
+            break;
+        case 'priority': {
+            const n = parseInt(val, 10);
+            if ( isNaN(n) || n <= 1 ) { return false; }
+>>>>>>> 2787fd5b6 (draft)
             rule.priority = n;
             break;
         }
@@ -123,9 +138,18 @@ const perScopeParsers = {
             scope.push('redirect');
             break;
         case 'requestHeaders':
+<<<<<<< HEAD
         case 'responseHeaders':
             rule.action[key] = [];
             scope.push(key);
+=======
+            rule.action.requestHeaders = [];
+            scope.push('requestHeaders');
+            break;
+        case 'responseHeaders':
+            rule.action.responseHeaders = [];
+            scope.push('responseHeaders');
+>>>>>>> 2787fd5b6 (draft)
             break;
         default:
             return false;
@@ -136,14 +160,27 @@ const perScopeParsers = {
         const { key, val } = node;
         switch ( key ) {
         case 'extensionPath':
+<<<<<<< HEAD
         case 'regexSubstitution':
         case 'url':
             rule.action.redirect[key] = val;
+=======
+            rule.action.redirect.extensionPath = val;
+            break;
+        case 'regexSubstitution':
+            rule.action.redirect.regexSubstitution = val;
+>>>>>>> 2787fd5b6 (draft)
             break;
         case 'transform':
             rule.action.redirect.transform = {};
             scope.push('transform');
             break;
+<<<<<<< HEAD
+=======
+        case 'url':
+            rule.action.redirect.url = val;
+            break;
+>>>>>>> 2787fd5b6 (draft)
         default:
             return false;
         }
@@ -158,8 +195,13 @@ const perScopeParsers = {
         case 'port':
         case 'query':
         case 'scheme': {
+<<<<<<< HEAD
             if ( val === undefined ) { return false; }
             rule.action.redirect.transform[key] = val;
+=======
+            const prop = key.trim();
+            rule.action.redirect.transform[prop] = val;
+>>>>>>> 2787fd5b6 (draft)
             break;
         }
         case 'queryTransform':
@@ -176,9 +218,18 @@ const perScopeParsers = {
         if ( val !== undefined ) { return false; }
         switch ( key ) {
         case 'addOrReplaceParams':
+<<<<<<< HEAD
         case 'removeParams':
             rule.action.redirect.transform.queryTransform[key] = [];
             scope.push(key);
+=======
+            rule.action.redirect.transform.queryTransform.addOrReplaceParams = [];
+            scope.push('addOrReplaceParams');
+            break;
+        case 'removeParams':
+            rule.action.redirect.transform.queryTransform.removeParams = [];
+            scope.push('removeParams');
+>>>>>>> 2787fd5b6 (draft)
             break;
         default:
             return false;
@@ -193,12 +244,22 @@ const perScopeParsers = {
     },
     'action.redirect.transform.queryTransform.addOrReplaceParams.@': function(scope, rule, node) {
         const { key, val } = node;
+<<<<<<< HEAD
         if ( val === undefined ) { return false; }
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
         case 'key':
         case 'value':
             item[key] = val;
+=======
+        const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
+        switch ( key ) {
+        case 'key':
+            item.key = val;
+            break;
+        case 'value':
+            item.value = val;
+>>>>>>> 2787fd5b6 (draft)
             break;
         case 'replaceOnly':
             if ( validBoolValues.includes(val) === false ) { return false; }
@@ -225,8 +286,15 @@ const perScopeParsers = {
         const item = rule.action.requestHeaders.at(-1);
         switch ( key ) {
         case 'header':
+<<<<<<< HEAD
         case 'value':
             item[key] = val;
+=======
+            item.header = val;
+            break;
+        case 'value':
+            item.value = val;
+>>>>>>> 2787fd5b6 (draft)
             break;
         case 'operation':
             if ( validHeaderOpValues.includes(val) === false ) { return false; }
@@ -248,8 +316,15 @@ const perScopeParsers = {
         const item = rule.action.responseHeaders.at(-1);
         switch ( key ) {
         case 'header':
+<<<<<<< HEAD
         case 'value':
             item[key] = val;
+=======
+            item.header = val;
+            break;
+        case 'value':
+            item.value = val;
+>>>>>>> 2787fd5b6 (draft)
             break;
         case 'operation':
             if ( validHeaderOpValues.includes(val) === false ) { return false; }
@@ -272,6 +347,7 @@ const perScopeParsers = {
             rule.condition.isUrlFilterCaseSensitive = val === 'true';
             break;
         case 'regexFilter':
+<<<<<<< HEAD
         case 'urlFilter':
             if ( val === undefined ) { return false; }
             rule.condition[key] = val;
@@ -292,6 +368,52 @@ const perScopeParsers = {
         case 'tabIds':
             rule.condition.tabIds = [];
             scope.push('tabIds');
+=======
+            rule.condition.regexFilter = val;
+            break;
+        case 'urlFilter':
+            rule.condition.urlFilter = val;
+            break;
+        case 'initiatorDomains':
+            rule.condition.initiatorDomains = [];
+            scope.push('initiatorDomains');
+            break;
+        case 'excludedInitiatorDomains':
+            rule.condition.excludedInitiatorDomains = [];
+            scope.push('excludedInitiatorDomains');
+            break;
+        case 'requestDomains':
+            rule.condition.requestDomains = [];
+            scope.push('requestDomains');
+            break;
+        case 'excludedRequestDomains':
+            rule.condition.excludedRequestDomains = [];
+            scope.push('excludedRequestDomains');
+            break;
+        case 'resourceTypes':
+            rule.condition.resourceTypes = [];
+            scope.push('resourceTypes');
+            break;
+        case 'excludedResourceTypes':
+            rule.condition.excludedResourceTypes = [];
+            scope.push('excludedResourceTypes');
+            break;
+        case 'requestMethods':
+            rule.condition.requestMethods = [];
+            scope.push('requestMethods');
+            break;
+        case 'excludedRequestMethods':
+            rule.condition.excludedRequestMethods = [];
+            scope.push('excludedRequestMethods');
+            break;
+        case 'responseHeaders':
+            rule.condition.responseHeaders = [];
+            scope.push('responseHeaders');
+            break;
+        case 'excludedResponseHeaders':
+            rule.condition.excludedResponseHeaders = [];
+            scope.push('excludedResponseHeaders');
+>>>>>>> 2787fd5b6 (draft)
             break;
         default:
             return false;
@@ -308,6 +430,7 @@ const perScopeParsers = {
         rule.condition.excludedInitiatorDomains.push(node.val);
         return true;
     },
+<<<<<<< HEAD
     'condition.domains': function(scope, rule, node) {
         if ( node.list !== true ) { return false; }
         rule.condition.domains.push(node.val);
@@ -318,6 +441,8 @@ const perScopeParsers = {
         rule.condition.excludedDomains.push(node.val);
         return true;
     },
+=======
+>>>>>>> 2787fd5b6 (draft)
     'condition.requestDomains': function(scope, rule, node) {
         if ( node.list !== true ) { return false; }
         rule.condition.requestDomains.push(node.val);
@@ -362,6 +487,7 @@ const perScopeParsers = {
         const item = rule.condition.responseHeaders.at(-1);
         switch ( node.key ) {
         case 'header':
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -369,6 +495,17 @@ const perScopeParsers = {
         case 'excludedValues':
             item[node.key] = [];
             scope.push(node.key);
+=======
+            item.header = node.val;
+            break;
+        case 'values':
+            item.values = [];
+            scope.push('values');
+            break;
+        case 'excludedValues':
+            item.excludedValues = [];
+            scope.push('excludedValues');
+>>>>>>> 2787fd5b6 (draft)
             break;
         default:
             return false;
@@ -397,6 +534,7 @@ const perScopeParsers = {
         const item = rule.condition.excludedResponseHeaders.at(-1);
         switch ( node.key ) {
         case 'header':
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -404,6 +542,17 @@ const perScopeParsers = {
         case 'excludedValues':
             item[node.key] = [];
             scope.push(node.key);
+=======
+            item.header = node.val;
+            break;
+        case 'values':
+            item.values = [];
+            scope.push('values');
+            break;
+        case 'excludedValues':
+            item.excludedValues = [];
+            scope.push('excludedValues');
+>>>>>>> 2787fd5b6 (draft)
             break;
         default:
             return false;
@@ -422,12 +571,15 @@ const perScopeParsers = {
         item.excludedValues.push(node.val);
         return true;
     },
+<<<<<<< HEAD
     'condition.tabIds': function(scope, rule, node) {
         if ( node.list !== true ) { return false; }
         const n = parseInt(node.val, 10);
         if ( isNaN(n) || n === 0 ) { return false; }
         rule.condition.tabIds.push(n);
     },
+=======
+>>>>>>> 2787fd5b6 (draft)
 };
 
 /******************************************************************************/
@@ -449,18 +601,29 @@ function nodeFromLine(line) {
         out.list = true;
     }
     if ( match[4] ) {
+<<<<<<< HEAD
         out.val = match[4].trim();
     } else if ( match[3] ) {
         out.key = match[2];
         out.val = match[3].trim();
         if ( out.val === "''" ) { out.val = '' };
+=======
+        out.val = match[4];
+    } else if ( match[3] ) {
+        out.key = match[2];
+        out.val = match[3].slice(1);
+>>>>>>> 2787fd5b6 (draft)
     } else {
         out.key = match[2];
     }
     return out;
 }
 
+<<<<<<< HEAD
 const reNodeParser = /^\s*(- )?(?:(\S+):( \S.*)?|(\S.*))$/;
+=======
+const reNodeParser = /^\s*(- )?(?:(\S+):( \S+)?|(\S+))$/;
+>>>>>>> 2787fd5b6 (draft)
 
 /******************************************************************************/
 
@@ -491,6 +654,7 @@ function ruleFromLines(lines, indices) {
 export function rulesFromText(text) {
     const rules = [];
     const bad = [];
+<<<<<<< HEAD
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
@@ -516,6 +680,22 @@ export function rulesFromText(text) {
         const result = ruleFromLines(lines, indices);
         if ( result.bad ) {
             bad.push(...result.bad.slice(0, 4));
+=======
+    const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '' ];
+    const indices = [];
+    for ( let i = 0; i < lines.length; i++ ) {
+        const line = lines[i].trimEnd();
+        const trimmed = line.trimStart();
+        if ( trimmed.startsWith('#') ) { continue; }
+        if ( line !== '---' && line !== '...' && trimmed !== '' ) {
+            indices.push(i);
+            continue;
+        }
+        if ( indices.length === 0 ) { continue; }
+        const result = ruleFromLines(lines, indices);
+        if ( result.bad ) {
+            bad.push(...result.bad);
+>>>>>>> 2787fd5b6 (draft)
         } else if ( result.rule ) {
             rules.push(result.rule);
         }
@@ -526,6 +706,7 @@ export function rulesFromText(text) {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 function textFromValue(val, depth) {
     const indent = '  '.repeat(depth);
     switch ( typeof val ) {
@@ -578,4 +759,7 @@ export function textFromRules(rules, option = {}) {
         out.push('');
     }
     return out.join('\n');
+=======
+export function textFromRules() {
+>>>>>>> 2787fd5b6 (draft)
 }

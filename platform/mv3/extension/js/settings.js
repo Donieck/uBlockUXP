@@ -26,6 +26,23 @@ import { renderFilterLists } from './filter-lists.js';
 
 /******************************************************************************/
 
+<<<<<<< HEAD
+=======
+const cm6 = self.cm6;
+
+const cmTrustedSites = (( ) => {
+    const options = {};
+    if ( dom.cl.has(':root', 'dark') ) {
+        options.oneDark = true;
+    }
+    options.placeholder = i18n$('noFilteringModePlaceholder');
+    return cm6.createEditorView(
+        cm6.createEditorState('', options),
+        qs$('#trustedSites')
+    );
+})();
+
+>>>>>>> 2787fd5b6 (draft)
 let cachedRulesetData = {};
 
 /******************************************************************************/
@@ -223,6 +240,7 @@ dom.on('section[data-pane="settings"] [data-i18n="backupButton"]', 'click', ( ) 
     backupSettings();
 });
 
+<<<<<<< HEAD
 dom.on('section[data-pane="settings"] [data-i18n="restoreButton"]', 'click', ( ) => {
     restoreSettings();
 });
@@ -230,6 +248,46 @@ dom.on('section[data-pane="settings"] [data-i18n="restoreButton"]', 'click', ( )
 dom.on('section[data-pane="settings"] [data-i18n="resetToDefaultButton"]', 'click', ( ) => {
     resetSettings();
 });
+=======
+function renderTrustedSites() {
+    const hostnames = cachedRulesetData.trustedSites || [];
+    let text = hostnames.map(hn => punycode.toUnicode(hn)).join('\n');
+    if ( text !== '' ) { text += '\n'; }
+    cmTrustedSites.dispatch({
+        changes: {
+            from: 0, to: cmTrustedSites.state.doc.length,
+            insert: text
+        },
+    });
+}
+
+function changeTrustedSites() {
+    const hostnames = getStagedTrustedSites();
+    const hash = hashFromIterable(cachedRulesetData.trustedSites || []);
+    if ( hashFromIterable(hostnames) === hash ) { return; }
+    sendMessage({
+        what: 'setTrustedSites',
+        hostnames,
+    });
+}
+
+function getStagedTrustedSites() {
+    const text = cmTrustedSites.state.doc.toString();
+    return text.split(/\s/).map(hn => {
+        try {
+            return punycode.toASCII(
+                (new URL(`https://${hn}/`)).hostname
+            );
+        } catch {
+        }
+        return '';
+    }).filter(hn => hn !== '');
+}
+
+dom.on(cmTrustedSites.contentDOM, 'blur', changeTrustedSites);
+
+self.addEventListener('beforeunload', changeTrustedSites);
+>>>>>>> 2787fd5b6 (draft)
 
 /******************************************************************************/
 
