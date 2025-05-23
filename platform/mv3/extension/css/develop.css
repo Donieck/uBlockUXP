@@ -20,10 +20,14 @@ section[data-pane="develop"] > div > * {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #cm-container {
 =======
 #cm-dnrRules {
 >>>>>>> 2787fd5b6 (draft)
+=======
+#cm-dnrRules {
+>>>>>>> b2c0092f4 (draft)
     flex-grow: 1;
     font-size: var(--monospace-size);
     overflow: hidden;
@@ -31,14 +35,19 @@ section[data-pane="develop"] > div > * {
 
 /* https://discuss.codemirror.net/t/how-to-set-max-height-of-the-editor/2882/2 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 #cm-container .cm-editor {
 =======
 #cm-dnrRules .cm-editor {
 >>>>>>> 2787fd5b6 (draft)
+=======
+#cm-dnrRules .cm-editor {
+>>>>>>> b2c0092f4 (draft)
     background-color: var(--surface-0);
     height: 100%;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 #cm-container .cm-editor .cm-line:has(.ubol-boundary) {
     background-image: url('line-hor-dashed.png'), url('line-hor-dashed.png');
@@ -176,6 +185,8 @@ section[data-pane="develop"] > div > * {
     padding: var(--default-gap-xxsmall) var(--default-gap-xsmall);
     }
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
 #cm-dnrRules .cm-editor .cm-line {
     border-bottom: 1px dotted transparent;
     border-top: 1px dotted transparent;
@@ -186,6 +197,7 @@ section[data-pane="develop"] > div > * {
     border-top: 1px dotted var(--border-1);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
 =======
 
@@ -193,3 +205,5 @@ section[data-pane="develop"] > div > * {
     background-color: var(--sf-error-surface);
     }
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)

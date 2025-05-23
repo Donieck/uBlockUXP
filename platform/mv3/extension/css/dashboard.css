@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 header {
 =======
 nav {
 >>>>>>> 2787fd5b6 (draft)
+=======
+nav {
+>>>>>>> b2c0092f4 (draft)
     background-color: var(--surface-1);
     position: sticky;
     top: 0;
@@ -41,9 +45,12 @@ nav > .tabButton:hover {
 body[data-pane="settings"] #dashboard-nav .tabButton[data-pane="settings"],
 body[data-pane="rulesets"] #dashboard-nav .tabButton[data-pane="rulesets"],
 <<<<<<< HEAD
+<<<<<<< HEAD
 body[data-pane="filters"] #dashboard-nav .tabButton[data-pane="filters"],
 =======
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
 body[data-pane="develop"] #dashboard-nav .tabButton[data-pane="develop"],
 body[data-pane="about"] #dashboard-nav .tabButton[data-pane="about"] {
     background-color: var(--dashboard-tab-active-surface);
@@ -55,15 +62,19 @@ body:not([data-develop="true"]) #dashboard-nav .tabButton[data-pane="develop"] {
     display: none;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 body:not([data-pane="rulesets"]) header [data-pane-related="rulesets"] {
     display: none;
     }
 =======
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
 
 body > section {
     box-sizing: border-box;
     display: none;
+<<<<<<< HEAD
 <<<<<<< HEAD
     padding: 0 var(--default-gap-xxsmall);
     padding-bottom: 2rem;
@@ -79,6 +90,8 @@ body[data-pane="develop"]:not(.busy) > section[data-pane="develop"],
 body[data-pane="about"]:not(.busy) > section[data-pane="about"],
 body.busy[data-pane] > section[data-pane="busy"] {
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
     padding-bottom: 2rem;
     }
 body[data-pane="settings"] > section[data-pane="settings"],

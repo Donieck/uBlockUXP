@@ -90,6 +90,7 @@ const perScopeParsers = {
         switch ( key ) {
         case 'action':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'condition':
             if ( val !== undefined ) { return false; }
             rule[key] = {};
@@ -105,6 +106,8 @@ const perScopeParsers = {
             const n = parseInt(val, 10);
             if ( isNaN(n) || n < 1 ) { return false; }
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
             if ( val !== undefined ) { return false; }
             rule.action = {};
             scope.push('action');
@@ -117,7 +120,10 @@ const perScopeParsers = {
         case 'priority': {
             const n = parseInt(val, 10);
             if ( isNaN(n) || n <= 1 ) { return false; }
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             rule.priority = n;
             break;
         }
@@ -139,17 +145,23 @@ const perScopeParsers = {
             break;
         case 'requestHeaders':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'responseHeaders':
             rule.action[key] = [];
             scope.push(key);
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
             rule.action.requestHeaders = [];
             scope.push('requestHeaders');
             break;
         case 'responseHeaders':
             rule.action.responseHeaders = [];
             scope.push('responseHeaders');
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         default:
             return false;
@@ -161,26 +173,38 @@ const perScopeParsers = {
         switch ( key ) {
         case 'extensionPath':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'regexSubstitution':
         case 'url':
             rule.action.redirect[key] = val;
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
             rule.action.redirect.extensionPath = val;
             break;
         case 'regexSubstitution':
             rule.action.redirect.regexSubstitution = val;
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         case 'transform':
             rule.action.redirect.transform = {};
             scope.push('transform');
             break;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         case 'url':
             rule.action.redirect.url = val;
             break;
 >>>>>>> 2787fd5b6 (draft)
+=======
+        case 'url':
+            rule.action.redirect.url = val;
+            break;
+>>>>>>> b2c0092f4 (draft)
         default:
             return false;
         }
@@ -197,6 +221,7 @@ const perScopeParsers = {
         case 'scheme': {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( val === undefined ) { return false; }
             rule.action.redirect.transform[key] = val;
 =======
@@ -207,6 +232,10 @@ const perScopeParsers = {
             if ( val === undefined ) { return false; }
             rule.action.redirect.transform[key] = val;
 >>>>>>> 994501208 (draft)
+=======
+            const prop = key.trim();
+            rule.action.redirect.transform[prop] = val;
+>>>>>>> b2c0092f4 (draft)
             break;
         }
         case 'queryTransform':
@@ -224,17 +253,23 @@ const perScopeParsers = {
         switch ( key ) {
         case 'addOrReplaceParams':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'removeParams':
             rule.action.redirect.transform.queryTransform[key] = [];
             scope.push(key);
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
             rule.action.redirect.transform.queryTransform.addOrReplaceParams = [];
             scope.push('addOrReplaceParams');
             break;
         case 'removeParams':
             rule.action.redirect.transform.queryTransform.removeParams = [];
             scope.push('removeParams');
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         default:
             return false;
@@ -251,6 +286,7 @@ const perScopeParsers = {
         const { key, val } = node;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ( val === undefined ) { return false; }
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
@@ -261,6 +297,8 @@ const perScopeParsers = {
 =======
         if ( val === undefined ) { return false; }
 >>>>>>> 994501208 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
         case 'key':
@@ -268,7 +306,10 @@ const perScopeParsers = {
             break;
         case 'value':
             item.value = val;
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         case 'replaceOnly':
             if ( validBoolValues.includes(val) === false ) { return false; }
@@ -296,14 +337,20 @@ const perScopeParsers = {
         switch ( key ) {
         case 'header':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'value':
             item[key] = val;
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
             item.header = val;
             break;
         case 'value':
             item.value = val;
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         case 'operation':
             if ( validHeaderOpValues.includes(val) === false ) { return false; }
@@ -326,14 +373,20 @@ const perScopeParsers = {
         switch ( key ) {
         case 'header':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'value':
             item[key] = val;
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
             item.header = val;
             break;
         case 'value':
             item.value = val;
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         case 'operation':
             if ( validHeaderOpValues.includes(val) === false ) { return false; }
@@ -356,6 +409,7 @@ const perScopeParsers = {
             rule.condition.isUrlFilterCaseSensitive = val === 'true';
             break;
         case 'regexFilter':
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         case 'urlFilter':
@@ -386,6 +440,11 @@ const perScopeParsers = {
             break;
         case 'urlFilter':
             if ( val === undefined ) { return false; }
+=======
+            rule.condition.regexFilter = val;
+            break;
+        case 'urlFilter':
+>>>>>>> b2c0092f4 (draft)
             rule.condition.urlFilter = val;
             break;
         case 'initiatorDomains':
@@ -427,7 +486,10 @@ const perScopeParsers = {
         case 'excludedResponseHeaders':
             rule.condition.excludedResponseHeaders = [];
             scope.push('excludedResponseHeaders');
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         default:
             return false;
@@ -445,6 +507,7 @@ const perScopeParsers = {
         return true;
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     'condition.domains': function(scope, rule, node) {
         if ( node.list !== true ) { return false; }
         rule.condition.domains.push(node.val);
@@ -457,6 +520,8 @@ const perScopeParsers = {
     },
 =======
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
     'condition.requestDomains': function(scope, rule, node) {
         if ( node.list !== true ) { return false; }
         rule.condition.requestDomains.push(node.val);
@@ -503,6 +568,7 @@ const perScopeParsers = {
         case 'header':
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -514,6 +580,8 @@ const perScopeParsers = {
 =======
             if ( node.val === undefined ) { return false; }
 >>>>>>> 994501208 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             item.header = node.val;
             break;
         case 'values':
@@ -523,7 +591,10 @@ const perScopeParsers = {
         case 'excludedValues':
             item.excludedValues = [];
             scope.push('excludedValues');
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         default:
             return false;
@@ -554,6 +625,7 @@ const perScopeParsers = {
         case 'header':
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -565,6 +637,8 @@ const perScopeParsers = {
 =======
             if ( node.val === undefined ) { return false; }
 >>>>>>> 994501208 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             item.header = node.val;
             break;
         case 'values':
@@ -574,7 +648,10 @@ const perScopeParsers = {
         case 'excludedValues':
             item.excludedValues = [];
             scope.push('excludedValues');
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
             break;
         default:
             return false;
@@ -594,6 +671,7 @@ const perScopeParsers = {
         return true;
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     'condition.tabIds': function(scope, rule, node) {
         if ( node.list !== true ) { return false; }
         const n = parseInt(node.val, 10);
@@ -602,6 +680,8 @@ const perScopeParsers = {
     },
 =======
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
 };
 
 /******************************************************************************/
@@ -624,17 +704,23 @@ function nodeFromLine(line) {
     }
     if ( match[4] ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         out.val = match[4].trim();
     } else if ( match[3] ) {
         out.key = match[2];
         out.val = match[3].trim();
         if ( out.val === "''" ) { out.val = '' };
 =======
+=======
+>>>>>>> b2c0092f4 (draft)
         out.val = match[4];
     } else if ( match[3] ) {
         out.key = match[2];
         out.val = match[3].slice(1);
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
     } else {
         out.key = match[2];
     }
@@ -642,10 +728,14 @@ function nodeFromLine(line) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const reNodeParser = /^\s*(- )?(?:(\S+):( \S.*)?|(\S.*))$/;
 =======
 const reNodeParser = /^\s*(- )?(?:(\S+):( \S+)?|(\S+))$/;
 >>>>>>> 2787fd5b6 (draft)
+=======
+const reNodeParser = /^\s*(- )?(?:(\S+):( \S+)?|(\S+))$/;
+>>>>>>> b2c0092f4 (draft)
 
 /******************************************************************************/
 
@@ -678,6 +768,7 @@ export function rulesFromText(text) {
     const bad = [];
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
@@ -708,11 +799,15 @@ export function rulesFromText(text) {
 =======
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
 >>>>>>> adebb5369 (draft)
+=======
+    const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '' ];
+>>>>>>> b2c0092f4 (draft)
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
         const line = lines[i].trimEnd();
         const trimmed = line.trimStart();
         if ( trimmed.startsWith('#') ) { continue; }
+<<<<<<< HEAD
         // Discard leading empty lines
         if ( trimmed === '' ) {
             if ( indices.length === 0 ) { continue; }
@@ -727,11 +822,20 @@ export function rulesFromText(text) {
             if ( s.length !== 0 ) { break; }
             indices.pop();
         }
+=======
+        if ( line !== '---' && line !== '...' && trimmed !== '' ) {
+            indices.push(i);
+            continue;
+        }
+>>>>>>> b2c0092f4 (draft)
         if ( indices.length === 0 ) { continue; }
         const result = ruleFromLines(lines, indices);
         if ( result.bad ) {
             bad.push(...result.bad);
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
         } else if ( result.rule ) {
             rules.push(result.rule);
         }
@@ -742,6 +846,7 @@ export function rulesFromText(text) {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 function textFromValue(val, depth) {
     const indent = '  '.repeat(depth);
@@ -798,4 +903,7 @@ export function textFromRules(rules, option = {}) {
 =======
 export function textFromRules() {
 >>>>>>> 2787fd5b6 (draft)
+=======
+export function textFromRules() {
+>>>>>>> b2c0092f4 (draft)
 }

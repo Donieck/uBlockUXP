@@ -39,7 +39,10 @@ const cmTrustedSites = (( ) => {
     return cm6.createEditorView(options, qs$('#trustedSites'));
 })();
 
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
+=======
+>>>>>>> b2c0092f4 (draft)
 let cachedRulesetData = {};
 
 /******************************************************************************/
