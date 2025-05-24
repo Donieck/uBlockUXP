@@ -769,6 +769,7 @@ export function rulesFromText(text) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
@@ -802,17 +803,24 @@ export function rulesFromText(text) {
 =======
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '' ];
 >>>>>>> b2c0092f4 (draft)
+=======
+    const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
+>>>>>>> 16f24b37f (draft)
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
         const line = lines[i].trimEnd();
         const trimmed = line.trimStart();
         if ( trimmed.startsWith('#') ) { continue; }
 <<<<<<< HEAD
+<<<<<<< HEAD
         // Discard leading empty lines
+=======
+>>>>>>> 16f24b37f (draft)
         if ( trimmed === '' ) {
             if ( indices.length === 0 ) { continue; }
         }
         if ( line !== '---' && line !== '...' ) {
+<<<<<<< HEAD
             indices.push(i);
             continue;
         }
@@ -824,6 +832,8 @@ export function rulesFromText(text) {
         }
 =======
         if ( line !== '---' && line !== '...' && trimmed !== '' ) {
+=======
+>>>>>>> 16f24b37f (draft)
             indices.push(i);
             continue;
         }

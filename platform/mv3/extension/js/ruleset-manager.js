@@ -89,6 +89,7 @@ function getRulesetDetails() {
 /******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 async function pruneInvalidRegexRules(realm, rulesIn, rejected = []) {
     const validateRegex = regex => {
         return dnr.isRegexSupported({ regex, isCaseSensitive: false }).then(result => {
@@ -96,6 +97,8 @@ async function pruneInvalidRegexRules(realm, rulesIn, rejected = []) {
             if ( result.isSupported ) { return true; }
             rejected.push({ regex, reason: result?.reason });
 =======
+=======
+>>>>>>> 16f24b37f (draft)
 async function pruneInvalidRegexRules(realm, rulesIn, rejectedRegexes = []) {
     const validateRegex = regex => {
         return dnr.isRegexSupported({ regex, isCaseSensitive: false }).then(result => {
@@ -103,7 +106,10 @@ async function pruneInvalidRegexRules(realm, rulesIn, rejectedRegexes = []) {
             pruneInvalidRegexRules.validated.set(regex, isSupported);
             if ( isSupported ) { return true; }
             rejectedRegexes.push(`${regex}\x1F${result?.reason}`);
+<<<<<<< HEAD
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
             return false;
         });
     };
@@ -130,6 +136,7 @@ async function pruneInvalidRegexRules(realm, rulesIn, rejectedRegexes = []) {
     const isValid = await Promise.all(toCheck);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     if ( rejected.length !== 0 ) {
         ubolLog(`${realm} realm: rejected regexes:\n`,
             rejected.map(e => `${e.regex} → ${e.reason}`).join('\n')
@@ -138,6 +145,11 @@ async function pruneInvalidRegexRules(realm, rulesIn, rejectedRegexes = []) {
         ubolLog(`${realm} realm: rejected regexes:\n`,
             rejectedRegexes.map(s => `${s.replace(/\x1F/g, ' ')}`).join('\n')
 >>>>>>> adebb5369 (draft)
+=======
+    if ( rejectedRegexes.length !== 0 ) {
+        ubolLog(`${realm} realm: rejected regexes:\n`,
+            rejectedRegexes.map(s => `${s.replace(/\x1F/g, ' ')}`).join('\n')
+>>>>>>> 16f24b37f (draft)
         );
     }
 
@@ -159,9 +171,12 @@ async function updateRegexRules(currentRules, addRules, removeRuleIds) {
     // Remove existing regex-related block rules
     for ( const rule of currentRules ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ( rule.id === 0 ) { continue; }
         if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
 =======
+=======
+>>>>>>> 16f24b37f (draft)
         if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
         const { type } = rule.action;
         if ( type !== 'block' && type !== 'allow' ) { continue; }
@@ -320,7 +335,10 @@ async function updateDynamicRules() {
     for ( const rule of currentRules ) {
         if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 16f24b37f (draft)
         if ( isStrictBlockRule(rule) === false ) { continue; }
 >>>>>>> adebb5369 (draft)
         removeRuleIds.push(rule.id);
@@ -339,7 +357,10 @@ async function updateDynamicRules() {
         if ( rule?.condition.regexFilter ) { dynamicRegexCountAfter += 1; }
 =======
         if ( rule?.condition.regexFilter ) { dynamicRegexCount += 1; }
+<<<<<<< HEAD
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
         rule.id = ruleId++;
     }
     if ( dynamicRegexCountAfter !== 0 ) {
@@ -779,6 +800,7 @@ async function getEnabledRulesetsDetails() {
 /******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 async function getEffectiveUserRules() {
     const allRules = await dnr.getDynamicRules();
     const userRules = [];
@@ -796,13 +818,18 @@ async function updateUserRules() {
     ] = await Promise.all([
         getEffectiveUserRules(),
 =======
+=======
+>>>>>>> 16f24b37f (draft)
 async function updateUserRules() {
     const [
         currentRules,
         userRulesText = '',
     ] = await Promise.all([
         dnr.getDynamicRules(),
+<<<<<<< HEAD
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
         localRead('userDnrRules'),
     ]);
 
@@ -812,6 +839,7 @@ async function updateUserRules() {
 
     const parsed = rulesFromText(effectiveRulesText);
     const { rules } = parsed;
+<<<<<<< HEAD
 <<<<<<< HEAD
     const removeRuleIds = [ ...userRules.map(a => a.id) ];
     const rejectedRegexes = [];
@@ -828,6 +856,8 @@ async function updateUserRules() {
         await localRemove('userDnrRuleCount');
         return out;
 =======
+=======
+>>>>>>> 16f24b37f (draft)
 
     const removeRuleIds = [];
     for ( const rule of currentRules ) {
@@ -840,11 +870,15 @@ async function updateUserRules() {
 
     if ( removeRuleIds.length === 0 && addRules.length === 0 ) {
         return { added: 0, removed: 0, rejectedRegexes };
+<<<<<<< HEAD
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
     }
 
     let ruleId = 0;
     for ( const rule of addRules ) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         rule.id = USER_RULES_BASE_RULE_ID + ruleId++;
         rule.priority = (rule.priority || 1) + USER_RULES_PRIORITY;
@@ -858,18 +892,24 @@ async function updateUserRules() {
         await dnr.updateDynamicRules({ removeRuleIds });
         await dnr.updateDynamicRules({ addRules });
 =======
+=======
+>>>>>>> 16f24b37f (draft)
         rule.id = USER_RULES_BASE_RULE_ID + ruleId;
         rule.priority = (rule.priority || 1) + USER_RULES_PRIORITY;
     }
 
     const result = await dnr.updateDynamicRules({ addRules, removeRuleIds }).then(( ) => {
+<<<<<<< HEAD
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
         if ( removeRuleIds.length !== 0 ) {
             ubolLog(`updateUserRules() / Removed ${removeRuleIds.length} dynamic DNR rules`);
         }
         if ( addRules.length !== 0 ) {
             ubolLog(`updateUserRules() / Added ${addRules.length} DNR rules`);
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         out.added = addRules.length;
         out.removed = removeRuleIds.length;
@@ -886,6 +926,8 @@ async function updateUserRules() {
     }
     return out;
 =======
+=======
+>>>>>>> 16f24b37f (draft)
         return { added: addRules.length, removed: removeRuleIds.length };
     }).catch(reason => {
         console.error(`updateUserRules() / ${reason}`);
@@ -893,7 +935,10 @@ async function updateUserRules() {
     });
 
     return Object.assign(result, { rejectedRegexes });
+<<<<<<< HEAD
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
 }
 
 /******************************************************************************/

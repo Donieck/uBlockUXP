@@ -632,12 +632,22 @@ import {
 } from './ext.js';
 =======
 import { dom, qs$ } from './dom.js';
+<<<<<<< HEAD
 import { localRead } from './ext.js';
 >>>>>>> b2c0092f4 (draft)
+=======
+import {
+    localRead,
+    localRemove,
+    localWrite,
+    sendMessage,
+} from './ext.js';
+>>>>>>> 16f24b37f (draft)
 import { rulesFromText } from './dnr-parser.js';
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // Details of YAML document(s) intersecting with a text span. If the text span
 // starts on a YAML document divider, the previous YAML document will be
@@ -841,6 +851,8 @@ function autoComplete(context) {
 
 /******************************************************************************/
 
+=======
+>>>>>>> 16f24b37f (draft)
 function setEditorText(text) {
     if ( text === undefined ) { return; }
     if ( text !== '' ) { text += '\n'; }
@@ -873,6 +885,7 @@ function saveEditorText() {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 function updateWidgets() {
     const { doc } = cmRules.state;
     const changed = doc.toString().trim() !== 
@@ -890,12 +903,22 @@ function updateWidgets() {
     if ( Boolean(bad?.length) === false ) { return; }
     self.cm6.lineErrorAdd(cmRules, bad.map(i => i + start));
 =======
+=======
+>>>>>>> 16f24b37f (draft)
 function updateWidgets() {
     const changed = cmRules.state.doc.toString().trim() !== 
         lastSavedText.trim();
     dom.attr('#dnrRulesApply', 'disabled', changed ? null : '');
     dom.attr('#dnrRulesRevert', 'disabled', changed ? null : '');
+<<<<<<< HEAD
 >>>>>>> b2c0092f4 (draft)
+=======
+    const { bad } = rulesFromText(getEditorText());
+    self.cm6.lineErrorClear(cmRules);
+    if ( bad?.length ) {
+        self.cm6.lineErrorAt(cmRules, bad);
+    }
+>>>>>>> 16f24b37f (draft)
 }
 
 function updateWidgetsAsync() {
@@ -908,6 +931,7 @@ function updateWidgetsAsync() {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const cmRules = (( ) => {
     return self.cm6.createEditorView({
@@ -935,14 +959,27 @@ const cmRules = (( ) => {
 let lastSavedText = '';
 
 const cm6 = self.cm6;
+=======
+>>>>>>> 16f24b37f (draft)
 const cmRules = (( ) => {
-    const options = {
+    return self.cm6.createEditorView({
         yaml: true,
         oneDark: dom.cl.has(':root', 'dark'),
         updateListener: function(info) {
             if ( info.docChanged === false ) { return; }
+            const doc = info.state.doc;
+            info.changes.desc.iterChangedRanges((fromA, toA, fromB, toB) => {
+                linesToLint.push([
+                    doc.lineAt(fromA).number - 1,
+                    doc.lineAt(toA).number - 1,
+                ], [
+                    doc.lineAt(fromB).number - 1,
+                    doc.lineAt(toB).number - 1,
+                ]);
+            });
             updateWidgetsAsync();
         },
+<<<<<<< HEAD
     };
     return cm6.createEditorView(
         cm6.createEditorState(`# bla bla bla
@@ -973,16 +1010,28 @@ condition:
         qs$('#cm-dnrRules')
     );
 >>>>>>> b2c0092f4 (draft)
+=======
+        saveListener: function() {
+            saveEditorText();
+        },
+        lineError: 'bad',
+    }, qs$('#cm-dnrRules'));
+>>>>>>> 16f24b37f (draft)
 })();
 
 /******************************************************************************/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+const linesToLint = [];
+>>>>>>> 16f24b37f (draft)
 let lastSavedText = '';
 
 localRead('userDnrRules').then(text => {
     text ||= '';
     setEditorText(text);
+<<<<<<< HEAD
     lastSavedText = text;
 =======
 localRead('userDNRRules').then(text => {
@@ -996,11 +1045,15 @@ localRead('userDNRRules').then(text => {
         },
     });
 >>>>>>> b2c0092f4 (draft)
+=======
+    lastSavedText = text;
+>>>>>>> 16f24b37f (draft)
 });
 
 /******************************************************************************/
 
 dom.on('#dnrRulesApply', 'click', ( ) => {
+<<<<<<< HEAD
 <<<<<<< HEAD
     saveEditorText();
 });
@@ -1016,15 +1069,14 @@ dom.on('#dnrRulesRevert', 'click', ( ) => {
     const rules = rulesFromText(text);
     console.log(rules);
     updateWidgets();
+=======
+    saveEditorText();
+>>>>>>> 16f24b37f (draft)
 });
 
 dom.on('#dnrRulesRevert', 'click', ( ) => {
-    cmRules.dispatch({
-        changes: {
-            from: 0, to: cmRules.state.doc.length,
-            insert: lastSavedText,
-        },
-    });
+    setEditorText(lastSavedText);
+    sendMessage({ what: 'updateUserDnrRules' });
 });
 >>>>>>> b2c0092f4 (draft)
 

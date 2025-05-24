@@ -198,6 +198,7 @@ section[data-pane="develop"] > div > * {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 2787fd5b6 (draft)
 =======
 
@@ -207,3 +208,9 @@ section[data-pane="develop"] > div > * {
 >>>>>>> adebb5369 (draft)
 =======
 >>>>>>> b2c0092f4 (draft)
+=======
+
+#cm-dnrRules .cm-editor .cm-line.bad:not(cm-activeLine) {
+    background-color: var(--sf-error-surface);
+    }
+>>>>>>> 16f24b37f (draft)

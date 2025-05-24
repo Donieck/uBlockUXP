@@ -581,6 +581,7 @@ function onMessage(request, sender, callback) {
         break;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     case 'getEffectiveDynamicRules':
         getEffectiveDynamicRules().then(result => {
             callback(result);
@@ -601,12 +602,15 @@ function onMessage(request, sender, callback) {
 
 =======
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
     case 'updateUserDnrRules':
         updateUserRules().then(result => {
             callback(result);
         });
         return true;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     case 'addCustomFilters':
         addCustomFilters(request.hostname, request.selectors).then(modified => {
@@ -659,6 +663,8 @@ function onMessage(request, sender, callback) {
 
 =======
 >>>>>>> adebb5369 (draft)
+=======
+>>>>>>> 16f24b37f (draft)
     default:
         break;
     }
