@@ -36,8 +36,14 @@ import { ubolErr, ubolLog } from './debug.js';
 import { dnr } from './ext-compat.js';
 import { fetchJSON } from './fetch.js';
 import { getAdminRulesets } from './admin.js';
+<<<<<<< HEAD
 import { hasBroadHostPermissions } from './ext-utils.js';
 import { rulesFromText } from './dnr-parser.js';
+=======
+import { hasBroadHostPermissions } from './utils.js';
+import { rulesFromText } from './dnr-parser.js';
+import { ubolLog } from './debug.js';
+>>>>>>> adebb5369 (draft)
 
 /******************************************************************************/
 
@@ -82,12 +88,22 @@ function getRulesetDetails() {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 async function pruneInvalidRegexRules(realm, rulesIn, rejected = []) {
     const validateRegex = regex => {
         return dnr.isRegexSupported({ regex, isCaseSensitive: false }).then(result => {
             pruneInvalidRegexRules.validated.set(regex, result?.reason || true);
             if ( result.isSupported ) { return true; }
             rejected.push({ regex, reason: result?.reason });
+=======
+async function pruneInvalidRegexRules(realm, rulesIn, rejectedRegexes = []) {
+    const validateRegex = regex => {
+        return dnr.isRegexSupported({ regex, isCaseSensitive: false }).then(result => {
+            const isSupported = result?.isSupported || false;
+            pruneInvalidRegexRules.validated.set(regex, isSupported);
+            if ( isSupported ) { return true; }
+            rejectedRegexes.push(`${regex}\x1F${result?.reason}`);
+>>>>>>> adebb5369 (draft)
             return false;
         });
     };
@@ -113,9 +129,15 @@ async function pruneInvalidRegexRules(realm, rulesIn, rejected = []) {
     // Collate results
     const isValid = await Promise.all(toCheck);
 
+<<<<<<< HEAD
     if ( rejected.length !== 0 ) {
         ubolLog(`${realm} realm: rejected regexes:\n`,
             rejected.map(e => `${e.regex} → ${e.reason}`).join('\n')
+=======
+    if ( rejectedRegexes.length !== 0 ) {
+        ubolLog(`${realm} realm: rejected regexes:\n`,
+            rejectedRegexes.map(s => `${s.replace(/\x1F/g, ' ')}`).join('\n')
+>>>>>>> adebb5369 (draft)
         );
     }
 
@@ -136,8 +158,14 @@ async function getDynamicRegexRuleCount() {
 async function updateRegexRules(currentRules, addRules, removeRuleIds) {
     // Remove existing regex-related block rules
     for ( const rule of currentRules ) {
+<<<<<<< HEAD
         if ( rule.id === 0 ) { continue; }
         if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
+=======
+        if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
+        const { type } = rule.action;
+        if ( type !== 'block' && type !== 'allow' ) { continue; }
+>>>>>>> adebb5369 (draft)
         if ( rule.condition.regexFilter === undefined ) { continue; }
         removeRuleIds.push(rule.id);
     }
@@ -171,6 +199,119 @@ async function updateRegexRules(currentRules, addRules, removeRuleIds) {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
+=======
+async function updateRemoveparamRules(currentRules, addRules, removeRuleIds) {
+    // Remove existing removeparam-related rules
+    for ( const rule of currentRules ) {
+        if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
+        if ( rule.action.type !== 'redirect' ) { continue; }
+        if ( rule.action.redirect.transform === undefined ) { continue; }
+        removeRuleIds.push(rule.id);
+    }
+
+    const rulesetDetails = await getEnabledRulesetsDetails();
+
+    // Fetch removeparam rules for all enabled rulesets
+    const toFetch = [];
+    for ( const details of rulesetDetails ) {
+        if ( details.rules.removeparam === 0 ) { continue; }
+        toFetch.push(fetchJSON(`/rulesets/removeparam/${details.id}`));
+    }
+    const removeparamRulesets = await Promise.all(toFetch);
+
+    const allRules = [];
+    for ( const rules of removeparamRulesets ) {
+        if ( Array.isArray(rules) === false ) { continue; }
+        for ( const rule of rules ) {
+            allRules.push(rule);
+        }
+    }
+    if ( allRules.length === 0 ) { return; }
+
+    const validRules = await pruneInvalidRegexRules('removeparam', allRules);
+    if ( validRules.length === 0 ) { return; }
+
+    ubolLog(`Add ${validRules.length} DNR removeparam rules`);
+    addRules.push(...validRules);
+}
+
+/******************************************************************************/
+
+async function updateRedirectRules(currentRules, addRules, removeRuleIds) {
+    // Remove existing redirect-related rules
+    for ( const rule of currentRules ) {
+        if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
+        if ( rule.action.type !== 'redirect' ) { continue; }
+        if ( rule.action.redirect.extensionPath === undefined ) { continue; }
+        removeRuleIds.push(rule.id);
+    }
+
+    const rulesetDetails = await getEnabledRulesetsDetails();
+
+    // Fetch redirect rules for all enabled rulesets
+    const toFetch = [];
+    for ( const details of rulesetDetails ) {
+        if ( details.rules.redirect === 0 ) { continue; }
+        toFetch.push(fetchJSON(`/rulesets/redirect/${details.id}`));
+    }
+    const redirectRulesets = await Promise.all(toFetch);
+
+    const allRules = [];
+    for ( const rules of redirectRulesets ) {
+        if ( Array.isArray(rules) === false ) { continue; }
+        for ( const rule of rules ) {
+            allRules.push(rule);
+        }
+    }
+    if ( allRules.length === 0 ) { return; }
+
+    const validRules = await pruneInvalidRegexRules('redirect', allRules);
+    if ( validRules.length === 0 ) { return; }
+
+    ubolLog(`Add ${validRules.length} DNR redirect rules`);
+    addRules.push(...validRules);
+}
+
+/******************************************************************************/
+
+async function updateModifyHeadersRules(currentRules, addRules, removeRuleIds) {
+    // Remove existing header modification-related rules
+    for ( const rule of currentRules ) {
+        if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
+        if ( rule.action.type !== 'modifyHeaders' ) { continue; }
+        removeRuleIds.push(rule.id);
+    }
+
+    const rulesetDetails = await getEnabledRulesetsDetails();
+
+    // Fetch modifyHeaders rules for all enabled rulesets
+    const toFetch = [];
+    for ( const details of rulesetDetails ) {
+        if ( details.rules.modifyHeaders === 0 ) { continue; }
+        toFetch.push(fetchJSON(`/rulesets/modify-headers/${details.id}`));
+    }
+    const rulesets = await Promise.all(toFetch);
+
+    const allRules = [];
+    for ( const rules of rulesets ) {
+        if ( Array.isArray(rules) === false ) { continue; }
+        for ( const rule of rules ) {
+            allRules.push(rule);
+        }
+    }
+    if ( allRules.length === 0 ) { return; }
+
+    const validRules = await pruneInvalidRegexRules('modify-headers', allRules);
+    if ( validRules.length === 0 ) { return; }
+
+    ubolLog(`Add ${validRules.length} DNR modify-headers rules`);
+    addRules.push(...validRules);
+}
+
+/******************************************************************************/
+
+>>>>>>> adebb5369 (draft)
 async function updateDynamicRules() {
     const currentRules = await dnr.getDynamicRules();
 
@@ -178,6 +319,10 @@ async function updateDynamicRules() {
     const removeRuleIds = [];
     for ( const rule of currentRules ) {
         if ( rule.id >= SPECIAL_RULES_REALM ) { continue; }
+<<<<<<< HEAD
+=======
+        if ( isStrictBlockRule(rule) === false ) { continue; }
+>>>>>>> adebb5369 (draft)
         removeRuleIds.push(rule.id);
         rule.id = 0;
     }
@@ -190,7 +335,11 @@ async function updateDynamicRules() {
     let dynamicRegexCountAfter = 0;
     let ruleId = 1;
     for ( const rule of addRules ) {
+<<<<<<< HEAD
         if ( rule?.condition.regexFilter ) { dynamicRegexCountAfter += 1; }
+=======
+        if ( rule?.condition.regexFilter ) { dynamicRegexCount += 1; }
+>>>>>>> adebb5369 (draft)
         rule.id = ruleId++;
     }
     if ( dynamicRegexCountAfter !== 0 ) {
@@ -629,6 +778,7 @@ async function getEnabledRulesetsDetails() {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 async function getEffectiveUserRules() {
     const allRules = await dnr.getDynamicRules();
     const userRules = [];
@@ -645,6 +795,14 @@ async function updateUserRules() {
         userRulesText = '',
     ] = await Promise.all([
         getEffectiveUserRules(),
+=======
+async function updateUserRules() {
+    const [
+        currentRules,
+        userRulesText = '',
+    ] = await Promise.all([
+        dnr.getDynamicRules(),
+>>>>>>> adebb5369 (draft)
         localRead('userDnrRules'),
     ]);
 
@@ -654,6 +812,7 @@ async function updateUserRules() {
 
     const parsed = rulesFromText(effectiveRulesText);
     const { rules } = parsed;
+<<<<<<< HEAD
     const removeRuleIds = [ ...userRules.map(a => a.id) ];
     const rejectedRegexes = [];
     const addRules = await pruneInvalidRegexRules('user', rules, rejectedRegexes);
@@ -668,10 +827,25 @@ async function updateUserRules() {
     if ( removeRuleIds.length === 0 && addRules.length === 0 ) {
         await localRemove('userDnrRuleCount');
         return out;
+=======
+
+    const removeRuleIds = [];
+    for ( const rule of currentRules ) {
+        if ( rule.id < USER_RULES_BASE_RULE_ID ) { continue; }
+        removeRuleIds.push(rule.id);
+    }
+
+    const rejectedRegexes = [];
+    const addRules = await pruneInvalidRegexRules('user', rules, rejectedRegexes);
+
+    if ( removeRuleIds.length === 0 && addRules.length === 0 ) {
+        return { added: 0, removed: 0, rejectedRegexes };
+>>>>>>> adebb5369 (draft)
     }
 
     let ruleId = 0;
     for ( const rule of addRules ) {
+<<<<<<< HEAD
         rule.id = USER_RULES_BASE_RULE_ID + ruleId++;
         rule.priority = (rule.priority || 1) + USER_RULES_PRIORITY;
     }
@@ -683,12 +857,20 @@ async function updateUserRules() {
     try {
         await dnr.updateDynamicRules({ removeRuleIds });
         await dnr.updateDynamicRules({ addRules });
+=======
+        rule.id = USER_RULES_BASE_RULE_ID + ruleId;
+        rule.priority = (rule.priority || 1) + USER_RULES_PRIORITY;
+    }
+
+    const result = await dnr.updateDynamicRules({ addRules, removeRuleIds }).then(( ) => {
+>>>>>>> adebb5369 (draft)
         if ( removeRuleIds.length !== 0 ) {
             ubolLog(`updateUserRules() / Removed ${removeRuleIds.length} dynamic DNR rules`);
         }
         if ( addRules.length !== 0 ) {
             ubolLog(`updateUserRules() / Added ${addRules.length} DNR rules`);
         }
+<<<<<<< HEAD
         out.added = addRules.length;
         out.removed = removeRuleIds.length;
     } catch(reason) {
@@ -703,6 +885,15 @@ async function updateUserRules() {
         }
     }
     return out;
+=======
+        return { added: addRules.length, removed: removeRuleIds.length };
+    }).catch(reason => {
+        console.error(`updateUserRules() / ${reason}`);
+        return { error: reason };
+    });
+
+    return Object.assign(result, { rejectedRegexes });
+>>>>>>> adebb5369 (draft)
 }
 
 /******************************************************************************/

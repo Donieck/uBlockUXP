@@ -68,7 +68,29 @@ import {
 } from './ext.js';
 
 import {
+<<<<<<< HEAD
     defaultConfig,
+=======
+    enableRulesets,
+    excludeFromStrictBlock,
+    getEnabledRulesetsDetails,
+    getRulesetDetails,
+    patchDefaultRulesets,
+    setStrictBlockMode,
+    updateDynamicRules,
+    updateSessionRules,
+    updateUserRules,
+} from './ruleset-manager.js';
+
+import {
+    getMatchedRules,
+    isSideloaded,
+    toggleDeveloperMode,
+    ubolLog,
+} from './debug.js';
+
+import {
+>>>>>>> adebb5369 (draft)
     loadRulesetConfig,
     process,
     rulesetConfig,
@@ -427,7 +449,14 @@ function onMessage(request, sender, callback) {
         return true;
 
     case 'setDeveloperMode':
+<<<<<<< HEAD
         setDeveloperMode(request.state).then(( ) => {
+=======
+        rulesetConfig.developerMode = request.state;
+        toggleDeveloperMode(rulesetConfig.developerMode);
+        updateUserRules();
+        saveRulesetConfig().then(( ) => {
+>>>>>>> adebb5369 (draft)
             callback();
         });
         return true;
@@ -536,6 +565,7 @@ function onMessage(request, sender, callback) {
         });
         break;
 
+<<<<<<< HEAD
     case 'getEffectiveDynamicRules':
         getEffectiveDynamicRules().then(result => {
             callback(result);
@@ -554,12 +584,15 @@ function onMessage(request, sender, callback) {
         });
         return true;
 
+=======
+>>>>>>> adebb5369 (draft)
     case 'updateUserDnrRules':
         updateUserRules().then(result => {
             callback(result);
         });
         return true;
 
+<<<<<<< HEAD
     case 'addCustomFilters':
         addCustomFilters(request.hostname, request.selectors).then(modified => {
             if ( modified !== true ) { return; }
@@ -609,6 +642,8 @@ function onMessage(request, sender, callback) {
         callback(getConsoleOutput());
         break;
 
+=======
+>>>>>>> adebb5369 (draft)
     default:
         break;
     }

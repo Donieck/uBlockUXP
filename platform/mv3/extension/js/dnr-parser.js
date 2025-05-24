@@ -655,6 +655,7 @@ export function rulesFromText(text) {
     const rules = [];
     const bad = [];
 <<<<<<< HEAD
+<<<<<<< HEAD
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
@@ -682,12 +683,18 @@ export function rulesFromText(text) {
             bad.push(...result.bad.slice(0, 4));
 =======
     const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '' ];
+=======
+    const lines = [ ...text.split(/\n\r|\r\n|\n|\r/), '---' ];
+>>>>>>> adebb5369 (draft)
     const indices = [];
     for ( let i = 0; i < lines.length; i++ ) {
         const line = lines[i].trimEnd();
         const trimmed = line.trimStart();
         if ( trimmed.startsWith('#') ) { continue; }
-        if ( line !== '---' && line !== '...' && trimmed !== '' ) {
+        if ( trimmed === '' ) {
+            if ( indices.length === 0 ) { continue; }
+        }
+        if ( line !== '---' && line !== '...' ) {
             indices.push(i);
             continue;
         }
