@@ -261,6 +261,7 @@
   },
   "developerModeLegend": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "message": "Enables access to features suitable for technical users.",
     "description": "Short description for a checkbox in the options page"
   },
@@ -281,6 +282,11 @@
     "description": "Short description for a checkbox in the options page"
   },
 >>>>>>> ea8157c1d (draft)
+=======
+    "message": "Enable access to features suitable for technical users.",
+    "description": "Short description for a checkbox in the options page"
+  },
+>>>>>>> f6f2b7ca9 (draft)
   "findListsPlaceholder": {
     "message": "Find lists",
     "description": "Placeholder for the input field used to find lists"
@@ -330,6 +336,7 @@
     "description": "Tooltip for the button used to exit zapper mode"
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
   "pickerTipEnter": {
     "message": "Create a custom filter",
     "description": "Label for the menu entry to create cosmetic filters"
@@ -364,6 +371,8 @@
   },
 =======
 >>>>>>> ea8157c1d (draft)
+=======
+>>>>>>> f6f2b7ca9 (draft)
   "saveButton": {
     "message": "Save",
     "description": "Text for buttons used to save changes"
@@ -373,12 +382,15 @@
     "description": "Text for buttons used to revert changes"
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
   "addButton": {
     "message": "Add",
     "description": "Text for buttons used to add content"
   },
 =======
 >>>>>>> ea8157c1d (draft)
+=======
+>>>>>>> f6f2b7ca9 (draft)
   "importAndAppendButton": {
     "message": "Import and append…",
     "description": "Text for buttons used to import and append content"
@@ -387,6 +399,7 @@
     "message": "Export…",
     "description": "Text for buttons used to export content"
   },
+<<<<<<< HEAD
 <<<<<<< HEAD
   "backupButton": {
     "message": "Back up…",
@@ -436,5 +449,10 @@
     "message": "Enter your own DNR rules below. <b>Do not add content from untrusted sources.</b>",
     "description": "Short description of the DNR rules editor pane"
 >>>>>>> ea8157c1d (draft)
+=======
+  "dnrRulesSummary": {
+    "message": "Enter your own DNR rules below. <b>Do not add content from untrusted sources.</b>",
+    "description": "Short description of the DNR rules editor pane"
+>>>>>>> f6f2b7ca9 (draft)
   }
 }

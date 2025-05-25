@@ -252,6 +252,17 @@ function setDeveloperMode(state) {
 
 /******************************************************************************/
 
+function setDeveloperMode(state) {
+    rulesetConfig.developerMode = state === true;
+    toggleDeveloperMode(rulesetConfig.developerMode);
+    return Promise.all([
+        updateUserRules(),
+        saveRulesetConfig(),
+    ]);
+}
+
+/******************************************************************************/
+
 function onMessage(request, sender, callback) {
 
     const tabId = sender?.tab?.id ?? false;
@@ -462,6 +473,7 @@ function onMessage(request, sender, callback) {
     case 'setDeveloperMode':
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         setDeveloperMode(request.state).then(( ) => {
 =======
         rulesetConfig.developerMode = request.state;
@@ -472,6 +484,9 @@ function onMessage(request, sender, callback) {
 =======
         setDeveloperMode(request.state).then(( ) => {
 >>>>>>> ea8157c1d (draft)
+=======
+        setDeveloperMode(request.state).then(( ) => {
+>>>>>>> f6f2b7ca9 (draft)
             callback();
         });
         return true;
