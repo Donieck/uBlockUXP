@@ -649,6 +649,9 @@ import { rulesFromText } from './dnr-parser.js';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc8b72cf1 (draft)
 // Details of YAML document(s) intersecting with a text span. If the text span
 // starts on a YAML document divider, the previous YAML document will be
 // included. If the text span ends on a YAML document divider, the next YAML
@@ -729,7 +732,11 @@ function getScopeAt(from) {
     return path.join('');
 }
 
+<<<<<<< HEAD
 function getAutocompleteCandidates(from) {
+=======
+function getAutocompleteCandidatesFromPath(from) {
+>>>>>>> fc8b72cf1 (draft)
     const scope = getScopeAt(from);
     switch ( scope ) {
     case '':
@@ -838,6 +845,7 @@ function getAutocompleteCandidates(from) {
     }
 }
 
+<<<<<<< HEAD
 function autoComplete(context) {
     const match = context.matchBefore(/[\w-]*/);
     if ( match === undefined ) { return null; }
@@ -847,12 +855,23 @@ function autoComplete(context) {
         from: match.from,
         options: candidates.map(e => ({ label: e[0], apply: `${e[0]}${e[1]}` })),
     };
+=======
+function getAutocompleteCandidates(context) {
+    const match = context.matchBefore(/[\w-]*/);
+    if ( match === undefined ) { return; }
+    const candidates = getAutocompleteCandidatesFromPath(match.from);
+    if ( candidates === undefined ) { return; }
+    return { match, candidates };
+>>>>>>> fc8b72cf1 (draft)
 }
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 =======
 >>>>>>> 16f24b37f (draft)
+=======
+>>>>>>> fc8b72cf1 (draft)
 function setEditorText(text) {
     if ( text === undefined ) { return; }
     if ( text !== '' ) { text += '\n'; }
@@ -906,10 +925,12 @@ function updateWidgets() {
 =======
 >>>>>>> 16f24b37f (draft)
 function updateWidgets() {
-    const changed = cmRules.state.doc.toString().trim() !== 
+    const { doc } = cmRules.state;
+    const changed = doc.toString().trim() !== 
         lastSavedText.trim();
     dom.attr('#dnrRulesApply', 'disabled', changed ? null : '');
     dom.attr('#dnrRulesRevert', 'disabled', changed ? null : '');
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> b2c0092f4 (draft)
 =======
@@ -919,6 +940,18 @@ function updateWidgets() {
         self.cm6.lineErrorAt(cmRules, bad);
     }
 >>>>>>> 16f24b37f (draft)
+=======
+    const { start, end } = modifiedRange;
+    if ( start === -1 || end === -1 ) { return; }
+    modifiedRange.start = modifiedRange.end = -1;
+    self.cm6.lineErrorClear(cmRules, start, end);
+    const firstLine = doc.line(start);
+    const lastLine = doc.line(end);
+    const text = doc.sliceString(firstLine.from, lastLine.to);
+    const { bad } = rulesFromText(text);
+    if ( Boolean(bad?.length) === false ) { return; }
+    self.cm6.lineErrorAdd(cmRules, bad.map(i => i + start));
+>>>>>>> fc8b72cf1 (draft)
 }
 
 function updateWidgetsAsync() {
@@ -963,19 +996,13 @@ const cm6 = self.cm6;
 >>>>>>> 16f24b37f (draft)
 const cmRules = (( ) => {
     return self.cm6.createEditorView({
-        yaml: true,
+        dnrRules: true,
         oneDark: dom.cl.has(':root', 'dark'),
         updateListener: function(info) {
             if ( info.docChanged === false ) { return; }
             const doc = info.state.doc;
             info.changes.desc.iterChangedRanges((fromA, toA, fromB, toB) => {
-                linesToLint.push([
-                    doc.lineAt(fromA).number - 1,
-                    doc.lineAt(toA).number - 1,
-                ], [
-                    doc.lineAt(fromB).number - 1,
-                    doc.lineAt(toB).number - 1,
-                ]);
+                addToModifiedRange(doc, fromB, toB);
             });
             updateWidgetsAsync();
         },
@@ -1015,6 +1042,16 @@ condition:
             saveEditorText();
         },
         lineError: 'bad',
+        // https://codemirror.net/examples/autocompletion/
+        autoComplete: context => {
+            const result = getAutocompleteCandidates(context);
+            if ( result === undefined ) { return null; }
+            const { match, candidates } = result;
+            return {
+                from: match.from,
+                options: candidates.map(e => ({ label: e[0], apply: `${e[0]}${e[1]}` })),
+            };
+        },
     }, qs$('#cm-dnrRules'));
 >>>>>>> 16f24b37f (draft)
 })();
@@ -1023,9 +1060,12 @@ condition:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const linesToLint = [];
 >>>>>>> 16f24b37f (draft)
+=======
+>>>>>>> fc8b72cf1 (draft)
 let lastSavedText = '';
 
 localRead('userDnrRules').then(text => {

@@ -222,6 +222,7 @@ const perScopeParsers = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( val === undefined ) { return false; }
             rule.action.redirect.transform[key] = val;
 =======
@@ -236,6 +237,10 @@ const perScopeParsers = {
             const prop = key.trim();
             rule.action.redirect.transform[prop] = val;
 >>>>>>> b2c0092f4 (draft)
+=======
+            if ( val === undefined ) { return false; }
+            rule.action.redirect.transform[key] = val;
+>>>>>>> fc8b72cf1 (draft)
             break;
         }
         case 'queryTransform':
@@ -287,6 +292,7 @@ const perScopeParsers = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ( val === undefined ) { return false; }
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
@@ -299,6 +305,9 @@ const perScopeParsers = {
 >>>>>>> 994501208 (draft)
 =======
 >>>>>>> b2c0092f4 (draft)
+=======
+        if ( val === undefined ) { return false; }
+>>>>>>> fc8b72cf1 (draft)
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
         case 'key':
@@ -412,6 +421,7 @@ const perScopeParsers = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'urlFilter':
             if ( val === undefined ) { return false; }
             rule.condition[key] = val;
@@ -436,15 +446,21 @@ const perScopeParsers = {
 =======
             if ( val === undefined ) { return false; }
 >>>>>>> 994501208 (draft)
+=======
+            if ( val === undefined ) { return false; }
+>>>>>>> fc8b72cf1 (draft)
             rule.condition.regexFilter = val;
             break;
         case 'urlFilter':
             if ( val === undefined ) { return false; }
+<<<<<<< HEAD
 =======
             rule.condition.regexFilter = val;
             break;
         case 'urlFilter':
 >>>>>>> b2c0092f4 (draft)
+=======
+>>>>>>> fc8b72cf1 (draft)
             rule.condition.urlFilter = val;
             break;
         case 'initiatorDomains':
@@ -569,6 +585,7 @@ const perScopeParsers = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -582,6 +599,9 @@ const perScopeParsers = {
 >>>>>>> 994501208 (draft)
 =======
 >>>>>>> b2c0092f4 (draft)
+=======
+            if ( node.val === undefined ) { return false; }
+>>>>>>> fc8b72cf1 (draft)
             item.header = node.val;
             break;
         case 'values':
@@ -626,6 +646,7 @@ const perScopeParsers = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -639,6 +660,9 @@ const perScopeParsers = {
 >>>>>>> 994501208 (draft)
 =======
 >>>>>>> b2c0092f4 (draft)
+=======
+            if ( node.val === undefined ) { return false; }
+>>>>>>> fc8b72cf1 (draft)
             item.header = node.val;
             break;
         case 'values':
@@ -813,9 +837,13 @@ export function rulesFromText(text) {
         if ( trimmed.startsWith('#') ) { continue; }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         // Discard leading empty lines
 =======
 >>>>>>> 16f24b37f (draft)
+=======
+        // Discard leading empty lines
+>>>>>>> fc8b72cf1 (draft)
         if ( trimmed === '' ) {
             if ( indices.length === 0 ) { continue; }
         }
@@ -830,6 +858,7 @@ export function rulesFromText(text) {
             if ( s.length !== 0 ) { break; }
             indices.pop();
         }
+<<<<<<< HEAD
 =======
         if ( line !== '---' && line !== '...' && trimmed !== '' ) {
 =======
@@ -838,6 +867,8 @@ export function rulesFromText(text) {
             continue;
         }
 >>>>>>> b2c0092f4 (draft)
+=======
+>>>>>>> fc8b72cf1 (draft)
         if ( indices.length === 0 ) { continue; }
         const result = ruleFromLines(lines, indices);
         if ( result.bad ) {
