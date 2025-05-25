@@ -733,10 +733,14 @@ function getScopeAt(from) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function getAutocompleteCandidates(from) {
 =======
 function getAutocompleteCandidatesFromPath(from) {
 >>>>>>> fc8b72cf1 (draft)
+=======
+function getAutocompleteCandidates(from) {
+>>>>>>> eb95b767b (draft)
     const scope = getScopeAt(from);
     switch ( scope ) {
     case '':
@@ -846,6 +850,7 @@ function getAutocompleteCandidatesFromPath(from) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function autoComplete(context) {
     const match = context.matchBefore(/[\w-]*/);
     if ( match === undefined ) { return null; }
@@ -863,6 +868,17 @@ function getAutocompleteCandidates(context) {
     if ( candidates === undefined ) { return; }
     return { match, candidates };
 >>>>>>> fc8b72cf1 (draft)
+=======
+function autoComplete(context) {
+    const match = context.matchBefore(/[\w-]*/);
+    if ( match === undefined ) { return null; }
+    const candidates = getAutocompleteCandidates(match.from);
+    if ( candidates === undefined ) { return null; }
+    return {
+        from: match.from,
+        options: candidates.map(e => ({ label: e[0], apply: `${e[0]}${e[1]}` })),
+    };
+>>>>>>> eb95b767b (draft)
 }
 
 /******************************************************************************/
@@ -986,6 +1002,7 @@ const cmRules = (( ) => {
         autocompletion: {
             override: [ autoComplete ],
             activateOnCompletion: ( ) => true,
+<<<<<<< HEAD
         },
     }, qs$('#cm-dnrRules'));
 =======
@@ -1051,6 +1068,8 @@ condition:
                 from: match.from,
                 options: candidates.map(e => ({ label: e[0], apply: `${e[0]}${e[1]}` })),
             };
+=======
+>>>>>>> eb95b767b (draft)
         },
     }, qs$('#cm-dnrRules'));
 >>>>>>> 16f24b37f (draft)
