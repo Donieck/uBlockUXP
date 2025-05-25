@@ -196,12 +196,17 @@ const perScopeParsers = {
         case 'query':
         case 'scheme': {
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( val === undefined ) { return false; }
             rule.action.redirect.transform[key] = val;
 =======
             const prop = key.trim();
             rule.action.redirect.transform[prop] = val;
 >>>>>>> 2787fd5b6 (draft)
+=======
+            if ( val === undefined ) { return false; }
+            rule.action.redirect.transform[key] = val;
+>>>>>>> 994501208 (draft)
             break;
         }
         case 'queryTransform':
@@ -245,6 +250,7 @@ const perScopeParsers = {
     'action.redirect.transform.queryTransform.addOrReplaceParams.@': function(scope, rule, node) {
         const { key, val } = node;
 <<<<<<< HEAD
+<<<<<<< HEAD
         if ( val === undefined ) { return false; }
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
@@ -252,6 +258,9 @@ const perScopeParsers = {
         case 'value':
             item[key] = val;
 =======
+=======
+        if ( val === undefined ) { return false; }
+>>>>>>> 994501208 (draft)
         const item = rule.action.redirect.transform.queryTransform.addOrReplaceParams.at(-1);
         switch ( key ) {
         case 'key':
@@ -348,6 +357,7 @@ const perScopeParsers = {
             break;
         case 'regexFilter':
 <<<<<<< HEAD
+<<<<<<< HEAD
         case 'urlFilter':
             if ( val === undefined ) { return false; }
             rule.condition[key] = val;
@@ -369,9 +379,13 @@ const perScopeParsers = {
             rule.condition.tabIds = [];
             scope.push('tabIds');
 =======
+=======
+            if ( val === undefined ) { return false; }
+>>>>>>> 994501208 (draft)
             rule.condition.regexFilter = val;
             break;
         case 'urlFilter':
+            if ( val === undefined ) { return false; }
             rule.condition.urlFilter = val;
             break;
         case 'initiatorDomains':
@@ -488,6 +502,7 @@ const perScopeParsers = {
         switch ( node.key ) {
         case 'header':
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -496,6 +511,9 @@ const perScopeParsers = {
             item[node.key] = [];
             scope.push(node.key);
 =======
+=======
+            if ( node.val === undefined ) { return false; }
+>>>>>>> 994501208 (draft)
             item.header = node.val;
             break;
         case 'values':
@@ -535,6 +553,7 @@ const perScopeParsers = {
         switch ( node.key ) {
         case 'header':
 <<<<<<< HEAD
+<<<<<<< HEAD
             if ( node.val === undefined ) { return false; }
             item.header = node.val;
             break;
@@ -543,6 +562,9 @@ const perScopeParsers = {
             item[node.key] = [];
             scope.push(node.key);
 =======
+=======
+            if ( node.val === undefined ) { return false; }
+>>>>>>> 994501208 (draft)
             item.header = node.val;
             break;
         case 'values':
@@ -691,12 +713,19 @@ export function rulesFromText(text) {
         const line = lines[i].trimEnd();
         const trimmed = line.trimStart();
         if ( trimmed.startsWith('#') ) { continue; }
+        // Discard leading empty lines
         if ( trimmed === '' ) {
             if ( indices.length === 0 ) { continue; }
         }
         if ( line !== '---' && line !== '...' ) {
             indices.push(i);
             continue;
+        }
+        // Discard trailing empty lines
+        while ( indices.length !== 0 ) {
+            const s = lines[indices.at(-1)].trim();
+            if ( s.length !== 0 ) { break; }
+            indices.pop();
         }
         if ( indices.length === 0 ) { continue; }
         const result = ruleFromLines(lines, indices);
