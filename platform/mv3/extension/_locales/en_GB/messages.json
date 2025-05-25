@@ -263,6 +263,7 @@
     "message": "Enable access to features suitable for technical users.",
     "description": "Short description for a checkbox in the options page"
   },
+<<<<<<< HEAD
   "settingsBackupRestoreLabel": {
     "message": "Backup",
     "description": "The header text for the back up/restore section"
@@ -275,6 +276,8 @@
     "message": "Restoring will overwrite all your current custom settings.",
     "description": "Important information about the back up/restore section."
   },
+=======
+>>>>>>> 46165e34f (Import translation work from https://crowdin.com/project/ublock)
   "findListsPlaceholder": {
     "message": "Find lists",
     "description": "Placeholder for the input field used to find lists"
@@ -323,6 +326,7 @@
     "message": "Exit element zapper mode",
     "description": "Tooltip for the button used to exit zapper mode"
   },
+<<<<<<< HEAD
   "pickerTipEnter": {
     "message": "Create a custom filter",
     "description": "Label for the menu entry to create cosmetic filters"
@@ -355,6 +359,8 @@
     "message": "Session ruleset",
     "description": "An option in a dropdown list"
   },
+=======
+>>>>>>> 46165e34f (Import translation work from https://crowdin.com/project/ublock)
   "saveButton": {
     "message": "Save",
     "description": "Text for buttons used to save changes"
@@ -363,10 +369,13 @@
     "message": "Revert",
     "description": "Text for buttons used to revert changes"
   },
+<<<<<<< HEAD
   "addButton": {
     "message": "Add",
     "description": "Text for buttons used to add content"
   },
+=======
+>>>>>>> 46165e34f (Import translation work from https://crowdin.com/project/ublock)
   "importAndAppendButton": {
     "message": "Import and append…",
     "description": "Text for buttons used to import and append content"
@@ -375,6 +384,7 @@
     "message": "Export…",
     "description": "Text for buttons used to export content"
   },
+<<<<<<< HEAD
   "backupButton": {
     "message": "Backup…",
     "description": "Text for buttons used to back up content"
@@ -418,5 +428,10 @@
   "unpickerUsage": {
     "message": "Select a filter below to highlight matching elements in the webpage. Click the dustbin to remove a filter.",
     "description": "Summary description on how to use the tool to remove custom filters"
+=======
+  "dnrRulesSummary": {
+    "message": "Enter your own DNR rules below. <b>Do not add content from untrusted sources.</b>",
+    "description": "Short description of the DNR rules editor pane"
+>>>>>>> 46165e34f (Import translation work from https://crowdin.com/project/ublock)
   }
 }
