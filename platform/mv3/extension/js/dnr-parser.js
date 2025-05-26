@@ -729,6 +729,7 @@ function nodeFromLine(line) {
     if ( match[4] ) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         out.val = match[4].trim();
     } else if ( match[3] ) {
         out.key = match[2];
@@ -745,12 +746,20 @@ function nodeFromLine(line) {
 >>>>>>> 2787fd5b6 (draft)
 =======
 >>>>>>> b2c0092f4 (draft)
+=======
+        out.val = match[4].trim();
+    } else if ( match[3] ) {
+        out.key = match[2];
+        out.val = match[3].trim();
+        if ( out.val === "''" ) { out.val = '' };
+>>>>>>> 8f8ca5aab (draft: import/export)
     } else {
         out.key = match[2];
     }
     return out;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 const reNodeParser = /^\s*(- )?(?:(\S+):( \S.*)?|(\S.*))$/;
@@ -760,6 +769,9 @@ const reNodeParser = /^\s*(- )?(?:(\S+):( \S+)?|(\S+))$/;
 =======
 const reNodeParser = /^\s*(- )?(?:(\S+):( \S+)?|(\S+))$/;
 >>>>>>> b2c0092f4 (draft)
+=======
+const reNodeParser = /^\s*(- )?(?:(\S+):( \S.*)?|(\S.*))$/;
+>>>>>>> 8f8ca5aab (draft: import/export)
 
 /******************************************************************************/
 
@@ -889,6 +901,9 @@ export function rulesFromText(text) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8f8ca5aab (draft: import/export)
 function textFromValue(val, depth) {
     const indent = '  '.repeat(depth);
     switch ( typeof val ) {
@@ -924,18 +939,27 @@ function textFromValue(val, depth) {
 
 /******************************************************************************/
 
+<<<<<<< HEAD
 export function textFromRules(rules, option = {}) {
+=======
+export function textFromRules(rules) {
+>>>>>>> 8f8ca5aab (draft: import/export)
     if ( Array.isArray(rules) === false ) {
         if ( rules instanceof Object === false ) { return; }
         rules = [ rules ];
     }
     const out = [];
     for ( const rule of rules ) {
+<<<<<<< HEAD
         if ( option.keepId !== true && rule.id ) { rule.id = undefined };
+=======
+        if ( rule.id ) { rule.id = undefined };
+>>>>>>> 8f8ca5aab (draft: import/export)
         const text = textFromValue(rule, 0);
         if ( text === undefined ) { continue; }
         out.push(text, '---' );
     }
+<<<<<<< HEAD
     if ( out.length !== 0 ) {
         out.unshift('---');
         out.push('');
@@ -947,4 +971,8 @@ export function textFromRules() {
 =======
 export function textFromRules() {
 >>>>>>> b2c0092f4 (draft)
+=======
+    out.push('');
+    return out.join('\n');
+>>>>>>> 8f8ca5aab (draft: import/export)
 }

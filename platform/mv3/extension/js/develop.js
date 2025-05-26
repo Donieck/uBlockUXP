@@ -630,6 +630,7 @@ import {
     localWrite,
     sendMessage,
 } from './ext.js';
+<<<<<<< HEAD
 =======
 import { dom, qs$ } from './dom.js';
 <<<<<<< HEAD
@@ -644,6 +645,12 @@ import {
 } from './ext.js';
 >>>>>>> 16f24b37f (draft)
 import { rulesFromText } from './dnr-parser.js';
+=======
+import {
+    rulesFromText,
+    textFromRules,
+} from './dnr-parser.js';
+>>>>>>> 8f8ca5aab (draft: import/export)
 
 /******************************************************************************/
 
@@ -982,6 +989,91 @@ function updateWidgetsAsync() {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+function importRulesFromFile() {
+    const input = qs$('input[type="file"]');
+    dom.on(input, 'change', ev => {
+        const file = ev.target.files[0];
+        if ( file === undefined || file.name === '' ) { return; }
+        if ( file.type !== 'application/json' ) { return; }
+        const fr = new FileReader();
+        fr.onload = ( ) => {
+            if ( typeof fr.result !== 'string' ) { return; }
+            const content = fr.result.trim();
+            const jsonParse = json => {
+                let rules;
+                try {
+                    rules = JSON.parse(json);
+                } catch {
+                }
+                return rules;
+            };
+            let rules = jsonParse(content);
+            if ( rules === undefined ) {
+                if ( content.startsWith('{') && content.endsWith('}') ) {
+                    rules = jsonParse(`[${content}]`);
+                }
+            }
+            if ( Array.isArray(rules) === false ) { return; }
+            let text = textFromRules(rules);
+            if ( text === undefined ) { return; }
+            const { doc } = cmRules.state;
+            const lastChars = doc.toString().trimEnd().slice(-4);
+            const lastLine = doc.line(doc.lines);
+            let from;
+            if ( lastLine.text !== '' ) {
+                text = `\n${text}`;
+                from = lastLine.to;
+                
+            } else {
+                from = lastLine.from;
+            }
+            if ( /(?:^|\n)---$/.test(lastChars) === false ) {
+                text = `---\n${text}`;
+            }
+            cmRules.dispatch({
+                changes: {
+                    from: doc.length,
+                    insert: text
+                },
+            });
+            cmRules.focus();
+        };
+        fr.readAsText(file);
+    });
+    // Reset to empty string, this will ensure a change event is properly
+    // triggered if the user pick a file, even if it's the same as the last
+    // one picked.
+    input.value = '';
+    input.click();
+}
+
+dom.on('#dnrRulesImport', 'click', importRulesFromFile);
+
+/******************************************************************************/
+
+function exportRulesToFile() {
+    const text = getEditorText();
+    const { rules } = rulesFromText(text);
+    if ( Array.isArray(rules) === false ) { return; }
+    let ruleId = 1;
+    for ( const rule of rules ) {
+        rule.id = ruleId++;
+    }
+    const filename = 'my-ubol-dnr-rules.json';
+    const a = document.createElement('a');
+    a.href = `data:application/json;charset=utf-8,${JSON.stringify(rules, null, 2)}`;
+    dom.attr(a, 'download', filename || '');
+    dom.attr(a, 'type', 'application/json');
+    a.click();
+}
+
+dom.on('#dnrRulesExport', 'click', exportRulesToFile);
+
+/******************************************************************************/
+
+>>>>>>> 8f8ca5aab (draft: import/export)
 const cmRules = (( ) => {
     return self.cm6.createEditorView({
         dnrRules: true,
@@ -1092,6 +1184,7 @@ localRead('userDnrRules').then(text => {
     setEditorText(text);
 <<<<<<< HEAD
     lastSavedText = text;
+<<<<<<< HEAD
 =======
 localRead('userDNRRules').then(text => {
     if ( text === undefined ) { return; }
@@ -1120,6 +1213,17 @@ dom.on('#dnrRulesApply', 'click', ( ) => {
 dom.on('#dnrRulesRevert', 'click', ( ) => {
     setEditorText(lastSavedText);
     sendMessage({ what: 'updateUserDnrRules' });
+=======
+
+    dom.on('#dnrRulesApply', 'click', ( ) => {
+        saveEditorText();
+    });
+
+    dom.on('#dnrRulesRevert', 'click', ( ) => {
+        setEditorText(lastSavedText);
+        sendMessage({ what: 'updateUserDnrRules' });
+    });
+>>>>>>> 8f8ca5aab (draft: import/export)
 });
 >>>>>>> 2787fd5b6 (draft)
 =======
