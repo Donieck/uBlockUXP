@@ -880,6 +880,7 @@ async function updateUserRules() {
     for ( const rule of addRules ) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         rule.id = USER_RULES_BASE_RULE_ID + ruleId++;
         rule.priority = (rule.priority || 1) + USER_RULES_PRIORITY;
     }
@@ -903,12 +904,21 @@ async function updateUserRules() {
 >>>>>>> adebb5369 (draft)
 =======
 >>>>>>> 16f24b37f (draft)
+=======
+        rule.id = USER_RULES_BASE_RULE_ID + ruleId++;
+        rule.priority = (rule.priority || 1) + USER_RULES_PRIORITY;
+    }
+
+    try {
+        await dnr.updateDynamicRules({ addRules, removeRuleIds });
+>>>>>>> e2863b5c4 (draft: search panel + fix other issues)
         if ( removeRuleIds.length !== 0 ) {
             ubolLog(`updateUserRules() / Removed ${removeRuleIds.length} dynamic DNR rules`);
         }
         if ( addRules.length !== 0 ) {
             ubolLog(`updateUserRules() / Added ${addRules.length} DNR rules`);
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         out.added = addRules.length;
@@ -939,6 +949,13 @@ async function updateUserRules() {
 >>>>>>> adebb5369 (draft)
 =======
 >>>>>>> 16f24b37f (draft)
+=======
+        return { added: addRules.length, removed: removeRuleIds.length, rejectedRegexes };
+    } catch(reason) {
+        console.error(`updateUserRules() / ${reason}`);
+        return { error: reason };
+    }
+>>>>>>> e2863b5c4 (draft: search panel + fix other issues)
 }
 
 /******************************************************************************/
