@@ -202,7 +202,7 @@ section[data-pane="develop"] > div > * {
 >>>>>>> 2787fd5b6 (draft)
 =======
 
-#cm-dnrRules .cm-editor .cm-line.bad:not(cm-activeLine) {
+#cm-dnrRules .cm-editor .cm-line.bad:not(.cm-activeLine) {
     background-color: var(--sf-error-surface);
     }
 >>>>>>> adebb5369 (draft)
