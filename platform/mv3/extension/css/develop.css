@@ -239,4 +239,8 @@ section[data-pane="develop"] > div > * {
     font-size: var(--button-font-size);
     min-height: calc(var(--button-font-size) * 1.8);
     }
+<<<<<<< HEAD
 >>>>>>> e2863b5c4 (draft: search panel + fix other issues)
+=======
+    
+>>>>>>> 7b93f9662 (Add make dependency for codemirror-ubol repo)

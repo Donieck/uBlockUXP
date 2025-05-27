@@ -3,19 +3,27 @@ run_options := $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: all clean cleanassets test lint chromium opera firefox npm dig \
 	mv3-chromium mv3-firefox mv3-edge mv3-safari ubol-codemirror \
+<<<<<<< HEAD
 	compare maxcost medcost mincost modifiers record wasm \
 	publish-chromium publish-edge publish-firefox \
 	publish-dev-chromium publish-dev-firefox \
 	upload-firefox upload-dev-firefox
+=======
+	compare maxcost medcost mincost modifiers record wasm
+>>>>>>> 7b93f9662 (Add make dependency for codemirror-ubol repo)
 
 sources := ./dist/version $(shell find ./assets -type f) $(shell find ./src -type f)
 platform := $(wildcard platform/*/*)
 assets := dist/build/uAssets
+<<<<<<< HEAD
 mv3-sources := \
 	$(shell find ./src -type f) \
 	$(wildcard platform/mv3/*) \
 	$(shell find ./platform/mv3/extension -name codemirror-ubol -prune -o -type f) \
 	platform/mv3/extension/lib/codemirror/codemirror-ubol/dist/cm6.bundle.ubol.min.js
+=======
+mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell find ./platform/mv3/extension -type f) ubol-codemirror
+>>>>>>> 7b93f9662 (Add make dependency for codemirror-ubol repo)
 mv3-data := $(shell find ./dist/build/mv3-data -type f)
 
 mv3-edge-deps := $(wildcard platform/mv3/edge/*)
@@ -68,7 +76,11 @@ dist/build/mv3-data:
 	mkdir -p dist/build/mv3-data
 
 ubol-codemirror:
+<<<<<<< HEAD
 	$(MAKE) -sC platform/mv3/extension/lib/codemirror/codemirror-ubol/ ubol.bundle
+=======
+	$(MAKE) -C platform/mv3/extension/lib/codemirror/codemirror-ubol/ ubol.bundle
+>>>>>>> 7b93f9662 (Add make dependency for codemirror-ubol repo)
 
 dist/build/uBOLite.chromium: tools/make-mv3.sh $(mv3-sources) $(platform) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh chromium
