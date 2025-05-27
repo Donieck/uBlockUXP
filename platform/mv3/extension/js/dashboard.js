@@ -19,6 +19,7 @@
     Home: https://github.com/gorhill/uBlock
 */
 
+<<<<<<< HEAD
 import { dom, qs$ } from './dom.js';
 import {
     localRead, localRemove, localWrite,
@@ -27,6 +28,16 @@ import {
 } from './ext.js';
 import { faIconsInit } from './fa-icons.js';
 import { i18n } from './i18n.js';
+=======
+import {
+    localRead,
+    localRemove,
+    localWrite,
+} from './ext.js';
+
+import { dom } from './dom.js';
+import { runtime } from './ext.js';
+>>>>>>> e4c3b99d3 (restore last active pane in dashboard)
 
 /******************************************************************************/
 
@@ -43,10 +54,22 @@ dom.on('#dashboard-nav', 'click', '.tabButton', ev => {
     const { pane } = ev.target.dataset;
     dom.body.dataset.pane = pane;
     if ( pane === 'settings' ) {
+<<<<<<< HEAD
         localRemove('dashboard.activePane');
     } else {
         localWrite('dashboard.activePane', pane);
     }
+=======
+        localRemove('activeDashboardPane');
+    } else {
+        localWrite('activeDashboardPane', pane);
+    }
+});
+
+localRead('activeDashboardPane').then(pane => {
+    if ( typeof pane !== 'string' ) { return; }
+    dom.body.dataset.pane = pane;
+>>>>>>> e4c3b99d3 (restore last active pane in dashboard)
 });
 
 localRead('dashboard.activePane').then(pane => {
