@@ -240,7 +240,10 @@ section[data-pane="develop"] > div > * {
     min-height: calc(var(--button-font-size) * 1.8);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> e2863b5c4 (draft: search panel + fix other issues)
 =======
     
 >>>>>>> 7b93f9662 (Add make dependency for codemirror-ubol repo)
+=======
+>>>>>>> 7b7dd0edc (attempt to convert pasted json into yaml format)
