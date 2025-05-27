@@ -18,11 +18,15 @@ assets := dist/build/uAssets
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b046d489c (fix makefile again)
 mv3-sources := \
 	$(shell find ./src -type f) \
 	$(wildcard platform/mv3/*) \
 	$(shell find ./platform/mv3/extension -name codemirror-ubol -prune -o -type f) \
 	platform/mv3/extension/lib/codemirror/codemirror-ubol/dist/cm6.bundle.ubol.min.js
+<<<<<<< HEAD
 =======
 mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell find ./platform/mv3/extension -type f) ubol-codemirror
 >>>>>>> 7b93f9662 (Add make dependency for codemirror-ubol repo)
@@ -32,6 +36,8 @@ mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell fi
 =======
 mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell find ./platform/mv3/extension -name codemirror-ubol -prune -o -type f)
 >>>>>>> 215e958cc (Fix makefile always building mv3)
+=======
+>>>>>>> b046d489c (fix makefile again)
 mv3-data := $(shell find ./dist/build/mv3-data -type f)
 
 mv3-edge-deps := $(wildcard platform/mv3/edge/*)
@@ -94,37 +100,53 @@ dist/build/uBOLite.chromium: tools/make-mv3.sh $(mv3-sources) $(platform) $(mv3-
 	tools/make-mv3.sh chromium
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 mv3-chromium: ubol-codemirror dist/build/uBOLite.chromium
 =======
 mv3-chromium: dist/build/uBOLite.chromium ubol-codemirror
 >>>>>>> 215e958cc (Fix makefile always building mv3)
+=======
+mv3-chromium: ubol-codemirror dist/build/uBOLite.chromium
+>>>>>>> b046d489c (fix makefile again)
 
 dist/build/uBOLite.firefox: tools/make-mv3.sh $(mv3-sources) $(platform) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh firefox
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 mv3-firefox: ubol-codemirror dist/build/uBOLite.firefox
 =======
 mv3-firefox: dist/build/uBOLite.firefox ubol-codemirror
 >>>>>>> 215e958cc (Fix makefile always building mv3)
+=======
+mv3-firefox: ubol-codemirror dist/build/uBOLite.firefox
+>>>>>>> b046d489c (fix makefile again)
 
 dist/build/uBOLite.edge: tools/make-mv3.sh $(mv3-sources) $(mv3-edge-deps) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh edge
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 mv3-edge: ubol-codemirror dist/build/uBOLite.edge
 =======
 mv3-edge: dist/build/uBOLite.edge ubol-codemirror
 >>>>>>> 215e958cc (Fix makefile always building mv3)
+=======
+mv3-edge: ubol-codemirror dist/build/uBOLite.edge
+>>>>>>> b046d489c (fix makefile again)
 
 dist/build/uBOLite.safari: tools/make-mv3.sh $(mv3-sources) $(mv3-safari-deps) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh safari
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 mv3-safari: ubol-codemirror dist/build/uBOLite.safari
 =======
 mv3-safari: dist/build/uBOLite.safari ubol-codemirror
 >>>>>>> 215e958cc (Fix makefile always building mv3)
+=======
+mv3-safari: ubol-codemirror dist/build/uBOLite.safari
+>>>>>>> b046d489c (fix makefile again)
 
 dist/build/uAssets:
 	tools/pull-assets.sh
