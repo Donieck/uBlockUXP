@@ -17,6 +17,7 @@ platform := $(wildcard platform/*/*)
 assets := dist/build/uAssets
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 mv3-sources := \
 	$(shell find ./src -type f) \
 	$(wildcard platform/mv3/*) \
@@ -28,6 +29,9 @@ mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell fi
 =======
 mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell find ./platform/mv3/extension -name codemirror-ubol -prune -o -type f) ubol-codemirror
 >>>>>>> c4de157df (Ignore submodule sources in makefile)
+=======
+mv3-sources := $(shell find ./src -type f) $(wildcard platform/mv3/*) $(shell find ./platform/mv3/extension -name codemirror-ubol -prune -o -type f)
+>>>>>>> 215e958cc (Fix makefile always building mv3)
 mv3-data := $(shell find ./dist/build/mv3-data -type f)
 
 mv3-edge-deps := $(wildcard platform/mv3/edge/*)
@@ -89,22 +93,38 @@ ubol-codemirror:
 dist/build/uBOLite.chromium: tools/make-mv3.sh $(mv3-sources) $(platform) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh chromium
 
+<<<<<<< HEAD
 mv3-chromium: ubol-codemirror dist/build/uBOLite.chromium
+=======
+mv3-chromium: dist/build/uBOLite.chromium ubol-codemirror
+>>>>>>> 215e958cc (Fix makefile always building mv3)
 
 dist/build/uBOLite.firefox: tools/make-mv3.sh $(mv3-sources) $(platform) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh firefox
 
+<<<<<<< HEAD
 mv3-firefox: ubol-codemirror dist/build/uBOLite.firefox
+=======
+mv3-firefox: dist/build/uBOLite.firefox ubol-codemirror
+>>>>>>> 215e958cc (Fix makefile always building mv3)
 
 dist/build/uBOLite.edge: tools/make-mv3.sh $(mv3-sources) $(mv3-edge-deps) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh edge
 
+<<<<<<< HEAD
 mv3-edge: ubol-codemirror dist/build/uBOLite.edge
+=======
+mv3-edge: dist/build/uBOLite.edge ubol-codemirror
+>>>>>>> 215e958cc (Fix makefile always building mv3)
 
 dist/build/uBOLite.safari: tools/make-mv3.sh $(mv3-sources) $(mv3-safari-deps) $(mv3-data) dist/build/mv3-data
 	tools/make-mv3.sh safari
 
+<<<<<<< HEAD
 mv3-safari: ubol-codemirror dist/build/uBOLite.safari
+=======
+mv3-safari: dist/build/uBOLite.safari ubol-codemirror
+>>>>>>> 215e958cc (Fix makefile always building mv3)
 
 dist/build/uAssets:
 	tools/pull-assets.sh
